@@ -4,49 +4,92 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
 
+var SerialPort = require('serialport');
+const Readline = require('@serialport/parser-readline')
 
 // load default props on start
 var defaults = fs.readFileSync('defaults.prop', 'utf8');
 var maxArray = defaults.split(";");
 
-var getMaxString = function(){
-   return maxArray[0]+';'+maxArray[1]+';'+maxArray[2]+';'+maxArray[3]+';';
+var sendDefaults = function() {
+    port.write('S1X0' + maxArray[0] + 'E');
+    port.write('S2X0' + maxArray[1] + 'E');
+    port.write('S3X0' + maxArray[2] + 'E');
+    port.write('S4X0' + maxArray[3] + 'E');
+};
+
+var connected = false;
+port = null;
+
+var getMaxString = function() {
+    return maxArray[0] + ';' + maxArray[1] + ';' + maxArray[2] + ';' + maxArray[3] + ';';
 };
 
 app.use(express.static('startmin'));
-
 app.get('/', function(req, res) {
-   res.sendfile('index.html');
+    res.sendfile('index.html');
 });
+
+var initPort = function(puerto) {
+    var self = this;
+    if (self.connected == true) {
+        return;
+    }
+    port = new SerialPort(puerto, {
+        baudRate: 9600
+    });
+    
+    self.connected = true;
+    port.on('close', function() {
+        self.connected = false;
+        self.port = null;
+
+    });
+    const parser = port.pipe(new Readline({ delimiter: '\n' }))
+    parser.on('data', function(data) {
+      if (data[0] == 1) { // si se detecta un reinicio 
+        sendDefaults(); // envio comandos de valores default
+      };
+        console.log(data);
+        io.emit('message', data);
+    });
+};
 
 io.on('connection', function(socket) {
-   console.log('A user connected');
+    var self = this;
 
-   setInterval(function() {
-      var random1 = Math.floor(Math.random() * 30); 
-      var random2 = Math.floor(Math.random() * 30); 
-      var random3 = Math.floor(Math.random() * 30); 
-      var random4 = Math.floor(Math.random() * 30); 
+    /*parser.on('data', function(data) {
+        console.log(data);
+        socket.send(data);
+    });*/
 
-      var comp1 = random1>=maxArray[0] ? 1:0;
-      var comp2 = random2>=maxArray[1] ? 1:0;
-      var comp3 = random3>=maxArray[2] ? 1:0;
-      var comp4 = random4>=maxArray[3] ? 1:0;
 
-      var data = '0;'+getMaxString()+random1+';'+random2+';'+random3+';'+random4+';'+comp1+';'+comp2+';'+comp3+';'+comp4+';';
-      socket.send(data);
-   }, 3000);
-
-   socket.on('setMax', function(data){
-      maxArray[data.index] = data.valor;
-      fs.writeFile('defaults.prop', getMaxString(), (err) => {
-        if (err) throw err;
-      });      
-   });
+    socket.on('setMax', function(data) {
+        var codeindex = data.index + 1;
+        if (port && port !== null) {
+            port.write('S' + codeindex + 'X0' + data.valor + 'E');
+        }
+        maxArray[data.index] = data.valor;
+        fs.writeFile('defaults.prop', getMaxString(), (err) => {
+            if (err) throw err;
+        });
+    });
 
 
 });
 
+setInterval(function() {
+    SerialPort.list(function(err, ports) {
+        if (ports) {
+            ports.forEach(function(each) {
+                if (JSON.stringify(each).match(/.*duino.*/gi)) {
+                    initPort(each.comName);
+                };
+            })
+        }
+    })
+}, 1000);
+
 http.listen(3000, function() {
-   console.log('listening on *:3000');
+    console.log('listening on *:3000');
 });
