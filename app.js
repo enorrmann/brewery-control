@@ -5,7 +5,9 @@ const io = require('socket.io')(http);
 const fs = require('fs');
 
 var SerialPort = require('serialport');
-const Readline = require('@serialport/parser-readline')
+const Readline = require('@serialport/parser-readline');
+let port = null;
+var connected = false;
 
 // load default props on start
 var defaults = fs.readFileSync('defaults.prop', 'utf8');
@@ -18,8 +20,8 @@ var sendDefaults = function() {
     port.write('S4X0' + maxArray[3] + 'E');
 };
 
-var connected = false;
-port = null;
+
+
 
 var getMaxString = function() {
     return maxArray[0] + ';' + maxArray[1] + ';' + maxArray[2] + ';' + maxArray[3] + ';';
