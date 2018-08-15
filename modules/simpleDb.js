@@ -7,8 +7,6 @@ var _save = function (data) {
     if (lastData !== data){
         stream.write(data + "\n");    
         lastData = data;
-    } else {
-        console.log('ya estaba '+data);
     }
     
 };
