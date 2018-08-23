@@ -52,13 +52,11 @@ var initPort = function (puerto) {
             sendDefaults(); // envio comandos de valores default
         }
         ;
-        console.log(data);
         io.emit('message', data);
     });
 };
 
 io.on('connection', function (socket) {
-
     socket.on('setMax', function (data) {
         var codeindex = data.index + 1;
         if (port && port !== null) {
@@ -82,16 +80,16 @@ setInterval(function () {
                     initPort(each.comName);
                 }
                 ;
-            })
+            });
         }
-    })
+    });
 }, 1000);
 
 
 /*setInterval(function () {
-    var random = Math.floor(Math.random() * 6) + 1  ;
-    db.save(random + " hola");
-}, 1000);*/
+ var random = Math.floor(Math.random() * 6) + 1  ;
+ db.save(random + " hola");
+ }, 1000);*/
 
 http.listen(3000, function () {
     console.log('listening on *:3000');

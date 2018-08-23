@@ -38,6 +38,13 @@
 
         <div id="wrapper">
             <div id="page-wrapper">
+                <div class="alert alert-warning text-center" id="mensajeEsperandoArduino">
+                    ESPERANDO DATOS DE SENSORES
+                </div>
+                <div class="alert alert-danger text-center" id="mensajeDesconectado">
+                    SE HA PERDIDO LA CONEXION CON EL SERVIDOR
+                </div>
+
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Panel de control</h1>
@@ -46,14 +53,14 @@
                 </div>
                 <!-- /.row -->
                 <div class="row">
-                    
-                <!-- UN TACHO INICIO -->
+
+                    <!-- UN TACHO INICIO -->
                     <div class="col-lg-3 col-md-6">
                         <div id="panelTacho0" class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-4">
-                                    <i id="thermo0" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho0">...</span>
+                                        <i id="thermo0" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho0">...</span>
                                     </div>
 
                                     <div class="col-xs-8 text-right">
@@ -72,13 +79,13 @@
                         </div>
                     </div>
                     <!-- UN TACHO FIN -->
-                <!-- UN TACHO INICIO -->
+                    <!-- UN TACHO INICIO -->
                     <div class="col-lg-3 col-md-6">
                         <div id="panelTacho1" class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-4">
-                                    <i id="thermo1" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho1">...</span>
+                                        <i id="thermo1" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho1">...</span>
                                     </div>
 
                                     <div class="col-xs-8 text-right">
@@ -97,13 +104,13 @@
                         </div>
                     </div>
                     <!-- UN TACHO FIN -->
-                <!-- UN TACHO INICIO -->
+                    <!-- UN TACHO INICIO -->
                     <div class="col-lg-3 col-md-6">
                         <div id="panelTacho2" class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-4">
-                                    <i id="thermo2" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho2">...</span>
+                                        <i id="thermo2" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho2">...</span>
                                     </div>
 
                                     <div class="col-xs-8 text-right">
@@ -122,13 +129,13 @@
                         </div>
                     </div>
                     <!-- UN TACHO FIN -->
-                <!-- UN TACHO INICIO -->
+                    <!-- UN TACHO INICIO -->
                     <div class="col-lg-3 col-md-6">
                         <div id="panelTacho3" class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-4">
-                                    <i id="thermo3" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho3">...</span>
+                                        <i id="thermo3" class="fa fa-thermometer-half fa-5x"></i> <span class="fa fa-3x tacho3">...</span>
                                     </div>
 
                                     <div class="col-xs-8 text-right">
@@ -147,8 +154,8 @@
                         </div>
                     </div>
                     <!-- UN TACHO FIN -->
-                  
-      
+
+
                 </div>
                 <!-- /.row -->
             </div>
@@ -175,52 +182,7 @@
         <!-- Custom Theme JavaScript -->
         <script src="../js/startmin.js"></script>
         <script src = "/socket.io/socket.io.js"></script>
-   
-<script>
-   var socket = io();
+        <script src="../js/client.js"></script>
 
-    var setMax = function(idx){
-        var valor = $('#input'+idx).val();
-        socket.emit('setMax',{index:idx, valor:valor});
-        $(".maxtacho"+idx).html(valor);
-        $('#input'+idx).val('');
-    };
-
-    var setClasses = function(index,status){
-        if (status==1){
-            $('#panelTacho'+index).addClass('panel-red').removeClass('panel-green');
-            $('#thermo'+index).addClass('fa-thermometer-full').removeClass('fa-thermometer-half');
-        } else {
-            $('#panelTacho'+index).addClass('panel-green').removeClass('panel-red');
-            $('#thermo'+index).addClass('fa-thermometer-half').removeClass('fa-thermometer-full');
-        }
-
-    }
-
-   socket.on('message', function(data){
-        var dataArray = data.split(";");
-
-        $(".maxtacho0").html(dataArray[1]);
-        $(".maxtacho1").html(dataArray[2]);
-        $(".maxtacho2").html(dataArray[3]);
-        $(".maxtacho3").html(dataArray[4]);
-
-        $(".tacho0").html(dataArray[5]+'&deg');
-        $(".tacho1").html(dataArray[6]+'&deg');
-        $(".tacho2").html(dataArray[7]+'&deg');
-        $(".tacho3").html(dataArray[8]+'&deg');
-
-        var comp0 = dataArray[9];
-        var comp1 = dataArray[10];
-        var comp2 = dataArray[11];
-        var comp3 = dataArray[12];
-
-        setClasses(0,comp0);
-        setClasses(1,comp1);
-        setClasses(2,comp2);
-        setClasses(3,comp3);
-
-   });
-</script>
     </body>
 </html>
