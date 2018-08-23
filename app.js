@@ -87,7 +87,7 @@ setInterval(function () {
 
 
 /*setInterval(function () {
- var random = Math.floor(Math.random() * 6) + 1  ;
+ var random = Math.floor(Math.random() * 16) + 1  ;
  db.save(random + " hola");
  }, 1000);*/
 

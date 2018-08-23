@@ -5,7 +5,8 @@ var stream = fs.createWriteStream("append.log", {flags: 'a'});
 var lastData;
 var _save = function (data) {
     if (lastData !== data){
-        stream.write(data + "\n");    
+        var time = new Date().getTime();
+        stream.write(time+";"+data + "\n");    
         lastData = data;
     }
     
