@@ -1,52 +1,30 @@
-var socket = io();
-
-var setMax = function (idx) {
-    var valor = $('#input' + idx).val();
-    socket.emit('setMax', {index: idx, valor: valor});
-    $(".maxtacho" + idx).html(valor);
-    $('#input' + idx).val('');
+var getItem = function (filename) {
+    //var item = '<a href="#" class="list-group-item"><i class="fa fa-comment fa-fw"></i> New Comment<span class="pull-right text-muted small"><em>4 minutes ago</em></span></a>';
+    return '<a href=/registros/' + filename + ' class="list-group-item"><i class="fa fa-comment fa-fw"></i> ' + filename + '<span class="pull-right text-muted small"><em>Descargar</em></span></a>';
 };
 
-var setClasses = function (index, status) {
-    if (status == 1) {
-        $('#panelTacho' + index).addClass('panel-red').removeClass('panel-green');
-        $('#thermo' + index).addClass('fa-thermometer-full').removeClass('fa-thermometer-half');
-    } else {
-        $('#panelTacho' + index).addClass('panel-green').removeClass('panel-red');
-        $('#thermo' + index).addClass('fa-thermometer-half').removeClass('fa-thermometer-full');
-    }
+var refreshList = function () {
 
+    $.get("/entries", function (myStringArray) {
+        var arrayLength = myStringArray.length;
+        var innerHtml = "";
+        for (var i = 0; i < arrayLength; i++) {
+            innerHtml += getItem(myStringArray[i]);
+        }
+
+        $('#registroList').html(innerHtml);
+
+    });
+};
+var startRecording = function () {
+    $.post("/startRecording", function (data) {
+        refreshList();
+    });
+};
+var stopRecording = function () {
+    $.post("/stopRecording", function (data) {
+        console.log("stop");
+    });
 };
 
-socket.on('disconnect', () => {
-    $('#mensajeDesconectado').show();
-});
-socket.on('connect', () => {
-    $('#mensajeDesconectado').hide();
-});
-
-socket.on('message', function (data) {
-    $('#mensajeEsperandoArduino').hide();
-    var dataArray = data.split(";");
-
-    $(".maxtacho0").html(dataArray[1]);
-    $(".maxtacho1").html(dataArray[2]);
-    $(".maxtacho2").html(dataArray[3]);
-    $(".maxtacho3").html(dataArray[4]);
-
-    $(".tacho0").html(dataArray[5] + '&deg');
-    $(".tacho1").html(dataArray[6] + '&deg');
-    $(".tacho2").html(dataArray[7] + '&deg');
-    $(".tacho3").html(dataArray[8] + '&deg');
-
-    var comp0 = dataArray[9];
-    var comp1 = dataArray[10];
-    var comp2 = dataArray[11];
-    var comp3 = dataArray[12];
-
-    setClasses(0, comp0);
-    setClasses(1, comp1);
-    setClasses(2, comp2);
-    setClasses(3, comp3);
-
-});
+refreshList();

@@ -26,9 +26,30 @@ var getMaxString = function () {
 };
 
 app.use(express.static('startmin'));
+app.use('/registros', express.static('registros'));
 
 app.get('/', function (req, res) {
     res.sendfile('index.html');
+});
+
+app.post('/startRecording', function (req, res) {
+    db.startRecording();
+    res.status(200).send();
+});
+
+app.post('/stopRecording', function (req, res) {
+    db.stopRecording();
+    res.status(200).send();
+});
+
+app.get('/registros/*.csv', function (req, res) {
+    res.sendfile(req.url);
+    console.log(req.url);
+});
+app.get('/entries', function (req, res) {
+    db.listEntries(function (error, items) {
+        res.status(200).send(items);
+    });
 });
 
 var initPort = function (puerto) {
@@ -51,7 +72,7 @@ var initPort = function (puerto) {
         if (data[0] == 1) { // si se detecta un reinicio 
             sendDefaults(); // envio comandos de valores default
         }
-        ;
+        db.save(data);
         io.emit('message', data);
     });
 };
@@ -85,11 +106,20 @@ setInterval(function () {
     });
 }, 1000);
 
-
-/*setInterval(function () {
- var random = Math.floor(Math.random() * 16) + 1  ;
+// test zone
+/*
+ setInterval(function () {
+ var random = Math.floor(Math.random() * 16) + 1;
  db.save(random + " hola");
- }, 1000);*/
+ }, 100);
+ 
+ db.startRecording();
+ 
+ setInterval(function () {
+ db.endRecording();
+ db.startRecording();
+ }, 20000);
+ */
 
 http.listen(3000, function () {
     console.log('listening on *:3000');

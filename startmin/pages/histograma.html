@@ -74,36 +74,42 @@
                 <div class="row">
 
 
-                       <div class="panel panel-default">
+                    <!-- panel tabla registros -->
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Datos historicos
-                                <div class="pull-right">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle"
-                                                data-toggle="dropdown">
-                                            Actions
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Action</a>
-                                            </li>
-                                            <li><a href="#">Another action</a>
-                                            </li>
-                                            <li><a href="#">Something else here</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                <i class="fa fa-bell fa-fw"></i> Control
+                            </div>
+                            <div class="panel-body">
+                                <button onclick="startRecording()" type="button" class="btn btn-danger">Grabar</button>
+                                <button onclick="stopRecording()" type="button" class="btn btn-danger">Finalizar</button>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bell fa-fw"></i> Registros
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="list-group" id="registroList">
                                 </div>
                             </div>
-                            <!-- /.panel-heading -->
+                        </div>
+                    </div>
+                    <!-- /.panel tabla registros -->
+
+                    <!-- panel grafico -->
+                    <div class="col-lg-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Datos historicos
+                            </div>
                             <div class="panel-body">
                                 <div id="morris-area-chart"></div>
                             </div>
-                            <!-- /.panel-body -->
                         </div>
+                    </div>
+                    <!-- /panel grafico -->
 
                 </div>
                 <!-- /.row -->
@@ -142,6 +148,7 @@
         <script src="../js/startmin.js"></script>
         <script src = "/socket.io/socket.io.js"></script>
         <script src="../js/client.js"></script>
+        <script src="../js/histo.js"></script>
 
 
     </body>
