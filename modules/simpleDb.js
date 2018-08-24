@@ -5,6 +5,7 @@ var stream = null;
 var lastData;
 var lastSaveTime = 0;
 var saving = false;
+var currentFileName = "";
 
 var _save = function (data) {
     if (!saving) {
@@ -37,6 +38,7 @@ var _startRecording = function () {
     if (!saving) {
         saving = true;
         var filename = getFilename();
+        currentFileName = filename;
         stream = fs.createWriteStream(filename, {flags: 'a'});
     }
 };
@@ -52,9 +54,17 @@ var _listEntries = function (f) {
     fs.readdir("registros", f);
 };
 
+var _getStatus = function () {
+    return {
+        currentFileName: currentFileName,
+        saving: saving
+    };
+};
+
 module.exports = {
     save: _save,
     startRecording: _startRecording,
     stopRecording: _stopRecording,
+    getStatus: _getStatus,
     listEntries: _listEntries
 };

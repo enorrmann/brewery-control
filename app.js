@@ -32,6 +32,10 @@ app.get('/', function (req, res) {
     res.sendfile('index.html');
 });
 
+app.get('/status', function (req, res) {
+    res.status(200).send(db.getStatus());
+});
+
 app.post('/startRecording', function (req, res) {
     db.startRecording();
     res.status(200).send();

@@ -1,12 +1,12 @@
 $(function () {
     var data = [];
-    
+
     function generateData() {
-        if (data.length >= 20){
+        if (data.length >= 20) {
             data.shift();
         }
         var d = new Date();
-        var n = d.getHours()+":"+d.getMinutes()+":"+ d.getSeconds();
+        var n = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 
         data.push({
             time: n,
@@ -14,8 +14,6 @@ $(function () {
             t2: Math.floor(Math.random() * 16) + 1,
             t3: Math.floor(Math.random() * 16) + 1
         });
-
-
         //return ret;
     }
 

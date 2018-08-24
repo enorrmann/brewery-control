@@ -81,8 +81,19 @@
                                 <i class="fa fa-bell fa-fw"></i> Control
                             </div>
                             <div class="panel-body">
-                                <button onclick="startRecording()" type="button" class="btn btn-danger">Grabar</button>
-                                <button onclick="stopRecording()" type="button" class="btn btn-danger">Finalizar</button>
+                                <div class="col-lg-2">
+                                    <!--
+                                    <button style="display: none;" id="btnStartRecording" onclick="startRecording()" type="button" class="btn btn-danger">Grabar</button>
+                                    <button style="display: none;" id="btnStopRecording" onclick="stopRecording()" type="button" class="btn btn-danger">Finalizar</button>
+                                    -->
+                                    <button style="display: none;" id="btnStartRecording" onclick="startRecording()" type="button" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-circle"></i></button>
+                                    <button style="display: none;"  id="btnStopRecording" onclick="stopRecording()" type="button" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-stop"></i></button>
+
+                                </div>
+                                <div class="col-lg-10" id="alertRecording">
+                                    
+                                </div>
+
                             </div>
                         </div>
                         <div class="panel panel-default">
