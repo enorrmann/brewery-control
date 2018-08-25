@@ -49,5 +49,5 @@ getStatus();
 
 socket.on('message', function (data) {
 
-    console.log(data);
+    updateGraph(data);
 });
