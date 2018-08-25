@@ -1,6 +1,7 @@
 var data = [];
-
+var lastSaveTime = 0;
 function pushData(newData) {
+
     if (data.length >= 20) {
         data.shift();
     }
@@ -24,6 +25,11 @@ function updateGraph(csvData) {
 
     var dataArray = csvData.split(";");
     var d = new Date();
+    if (d - lastSaveTime <= 10000) { // si no pasaron 10 segundos aun
+        return;
+    }
+    lastSaveTime = time;
+
     var n = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     var newData = 
     {
