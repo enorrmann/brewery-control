@@ -28,7 +28,7 @@ function updateGraph(csvData) {
     if (d - lastSaveTime <= 10000) { // si no pasaron 10 segundos aun
         return;
     }
-    lastSaveTime = time;
+    lastSaveTime = d;
 
     var n = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     var newData = 
