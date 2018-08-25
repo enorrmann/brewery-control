@@ -1,6 +1,6 @@
 var data = [];
 
-function generateData(newData) {
+function pushData(newData) {
     if (data.length >= 20) {
         data.shift();
     }
