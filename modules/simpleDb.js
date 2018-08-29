@@ -22,7 +22,7 @@ var _save = function (data) {
 
 var getTimeString = function (milis) {
     var d = new Date(milis);
-    return d.getDay() + "-" + d.getMonth() + "-" + d.getFullYear() + " " + lead(d.getHours()) + ":" + lead(d.getMinutes()) + ":" + lead(d.getSeconds());
+    return lead(d.getDate()) + "-" + lead(d.getMonth()+1) + "-" + d.getFullYear() + " " + lead(d.getHours()) + ":" + lead(d.getMinutes()) + ":" + lead(d.getSeconds());
 };
 
 var getFilename = function (d) {
