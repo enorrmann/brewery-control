@@ -3,7 +3,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
-const db = require('./modules/simpleDb.js');
+const logger = require('./modules/simpleDb.js');
 
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
@@ -33,16 +33,16 @@ app.get('/', function (req, res) {
 });
 
 app.get('/status', function (req, res) {
-    res.status(200).send(db.getStatus());
+    res.status(200).send(logger.getStatus());
 });
 
 app.post('/startRecording', function (req, res) {
-    db.startRecording();
+    logger.startRecording();
     res.status(200).send();
 });
 
 app.post('/stopRecording', function (req, res) {
-    db.stopRecording();
+    logger.stopRecording();
     res.status(200).send();
 });
 
@@ -51,7 +51,7 @@ app.get('/registros/*.csv', function (req, res) {
     console.log(req.url);
 });
 app.get('/entries', function (req, res) {
-    db.listEntries(function (error, items) {
+    logger.listEntries(function (error, items) {
         res.status(200).send(items);
     });
 });
@@ -76,7 +76,7 @@ var initPort = function (puerto) {
         if (data[0] == 1) { // si se detecta un reinicio 
             sendDefaults(); // envio comandos de valores default
         }
-        db.save(data);
+        logger.save(data);
         io.emit('message', data);
     });
 };
@@ -114,14 +114,14 @@ setInterval(function () {
 /*
  setInterval(function () {
  var random = Math.floor(Math.random() * 16) + 1;
- db.save(random + " hola");
+ logger.save(random + " hola");
  }, 100);
  
- db.startRecording();
+ logger.startRecording();
  
  setInterval(function () {
- db.endRecording();
- db.startRecording();
+ logger.endRecording();
+ logger.startRecording();
  }, 20000);
  */
 
