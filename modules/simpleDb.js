@@ -27,7 +27,7 @@ var getTimeString = function (milis) {
 
 var getFilename = function (d) {
     var d = new Date();
-    return "registros/registro_" + d.getDay() + "_" + d.getMonth() + "_" + d.getFullYear() + "_" + lead(d.getHours()) + "_" + lead(d.getMinutes()) + "_" + lead(d.getSeconds()) + ".csv";
+    return "registros/registro_" + lead(d.getDate()) + "_" + lead(d.getMonth()+1) + "_" + d.getFullYear() + "_" + lead(d.getHours()) + "_" + lead(d.getMinutes()) + "_" + lead(d.getSeconds()) + ".csv";
 };
 
 var lead = function (number) {
