@@ -13,7 +13,9 @@ var _save = function (data) {
     }
     var time = new Date().getTime();
     if (lastData !== data && (time - lastSaveTime) > 10000) { // intervalo minimo entre eventos de guardado, por ejemplo 10 segundos
-        stream.write(getTimeString(time) + ";" + data + "\n");
+        var toSave = getTimeString(time) + ";" + data + "\n";
+        toSave = toSave.split(';').join(',');
+        stream.write(toSave);
         lastData = data;
         lastSaveTime = time;
     }
