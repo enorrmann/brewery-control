@@ -7,6 +7,9 @@ var lastSaveTime = 0;
 var saving = false;
 var currentFileName = "";
 
+var writeEncabezados = function () {
+    stream.write("fecha,reinicio,max1,max2,max3,max4,temp1,temp2,temp3,temp4,comp1,comp2,comp3,comp4\n");
+};
 var _save = function (data) {
     if (!saving) {
         return;
@@ -42,6 +45,7 @@ var _startRecording = function () {
         var filename = getFilename();
         currentFileName = filename;
         stream = fs.createWriteStream(filename, {flags: 'a'});
+        writeEncabezados();
     }
 };
 
