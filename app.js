@@ -1,9 +1,53 @@
 const express = require('express');
+
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
+
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
 const logger = require('./modules/simpleDb.js');
+const db = require('./users');
+var path = require('path');
+
+passport.use(new Strategy(
+        function (username, password, cb) {
+            db.users.findByUsername(username, function (err, user) {
+                if (err) {
+                    return cb(err);
+                }
+                if (!user) {
+                    return cb(null, false);
+                }
+                if (user.password != password) {
+                    return cb(null, false);
+                }
+                return cb(null, user);
+            });
+        }));
+
+passport.serializeUser(function (user, cb) {
+    cb(null, user.id);
+});
+
+passport.deserializeUser(function (id, cb) {
+    db.users.findById(id, function (err, user) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, user);
+    });
+});
+
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({extended: true}));
+app.use(require('express-session')({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
@@ -25,16 +69,15 @@ var getMaxString = function () {
     return maxArray[0] + ';' + maxArray[1] + ';' + maxArray[2] + ';' + maxArray[3] + ';';
 };
 
-app.use(express.static('startmin'));
+//app.use(express.static('startmin'));
 app.use('/registros', express.static('registros'));
 
-app.get('/', function (req, res) {
-    res.sendfile('index.html');
-});
+app.get('/status',
+        require('connect-ensure-login').ensureLoggedIn(),
+        function (req, res) {
+            res.status(200).send(logger.getStatus());
+        });
 
-app.get('/status', function (req, res) {
-    res.status(200).send(logger.getStatus());
-});
 
 app.post('/startRecording', function (req, res) {
     logger.startRecording();
@@ -46,9 +89,37 @@ app.post('/stopRecording', function (req, res) {
     res.status(200).send();
 });
 
+app.get('/login', function (req, res) {
+    res.sendFile(path.join(__dirname, './startmin/pages', 'login.html'));
+});
+
+app.get('/*.js', function (req, res) {
+    res.sendFile(path.join(__dirname, './startmin', req.url));
+});
+app.get('/*.css', function (req, res) {
+    res.sendFile(path.join(__dirname, './startmin', req.url));
+});
+app.get('/*.html',
+        require('connect-ensure-login').ensureLoggedIn(),
+        function (req, res) {
+            res.sendFile(path.join(__dirname, './startmin/pages', req.url));
+        });
+
+app.get('/',
+        require('connect-ensure-login').ensureLoggedIn(),
+        function (req, res) {
+            res.sendFile(path.join(__dirname, './startmin/pages', 'index.html'));
+        });
+
+app.post('/login',
+        passport.authenticate('local', {failureRedirect: '/login'}),
+        function (req, res) {
+            res.redirect('/');
+        });
+
+
 app.get('/registros/*.csv', function (req, res) {
-    res.sendfile(req.url);
-    console.log(req.url);
+    res.sendFile(req.url);
 });
 app.get('/entries', function (req, res) {
     logger.listEntries(function (error, items) {
