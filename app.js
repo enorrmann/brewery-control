@@ -181,21 +181,6 @@ setInterval(function () {
     });
 }, 1000);
 
-// test zone
-/*
- setInterval(function () {
- var random = Math.floor(Math.random() * 16) + 1;
- logger.save(random + " hola");
- }, 100);
- 
- logger.startRecording();
- 
- setInterval(function () {
- logger.endRecording();
- logger.startRecording();
- }, 20000);
- */
-
 http.listen(3000, function () {
     console.log('listening on *:3000');
 });
