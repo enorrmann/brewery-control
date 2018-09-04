@@ -151,6 +151,7 @@ var initPort = function (puerto) {
             sendDefaults(); // envio comandos de valores default
         }
         logger.save(data);
+        program.monitor(data);
         io.emit('message', data);
     });
 };

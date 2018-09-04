@@ -42,6 +42,6 @@ function updateGraph(csvData) {
         t2 : dataArray[6],
         t3 : dataArray[7],
         t4 : dataArray[8]
-    }
+    };
     pushData(newData);
 }
