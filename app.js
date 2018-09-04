@@ -9,7 +9,10 @@ const io = require('socket.io')(http);
 const fs = require('fs');
 const logger = require('./modules/simpleDb.js');
 const db = require('./users');
+const program = require('./modules/program.js');
 var path = require('path');
+
+program.run();
 
 passport.use(new Strategy(
         function (username, password, cb) {
