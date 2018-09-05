@@ -22,6 +22,60 @@
             ]
         }
     ],
-    "running": [
-    ]
+    "running": {
+        "t1": {
+            "nombre": "basico",
+            "descripcion": "La primer receta y la mas usada",
+            "pasos": [
+                {
+                    "paso": "primer paso",
+                    "duracion": 10000,
+                    "temperatura": 15,
+                    "startTime": 1536176202121,
+                    "endTime": 1536176212121
+                },
+                {
+                    "paso": "segundo paso",
+                    "duracion": 4000,
+                    "temperatura": 18,
+                    "startTime": 1536176212122,
+                    "endTime": 1536176216122
+                },
+                {
+                    "paso": "tercer paso",
+                    "duracion": 14000,
+                    "temperatura": 23,
+                    "startTime": 1536176216123,
+                    "endTime": 1536176230123
+                }
+            ]
+        },
+        "t2": {
+            "nombre": "basico",
+            "descripcion": "La primer receta y la mas usada",
+            "pasos": [
+                {
+                    "paso": "primer paso",
+                    "duracion": 10000,
+                    "temperatura": 15,
+                    "startTime": 1536176206121,
+                    "endTime": 1536176216121
+                },
+                {
+                    "paso": "segundo paso",
+                    "duracion": 4000,
+                    "temperatura": 18,
+                    "startTime": 1536176216122,
+                    "endTime": 1536176220122
+                },
+                {
+                    "paso": "tercer paso",
+                    "duracion": 14000,
+                    "temperatura": 23,
+                    "startTime": 1536176220123,
+                    "endTime": 1536176234123
+                }
+            ]
+        }
+    }
 }

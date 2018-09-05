@@ -1,14 +1,20 @@
 var JsonDB = require('node-json-db');
-
 var db = new JsonDB("programas", true, true);
-
-
-
 const adapter = require('./sensorAdapter.js');
 
 var programa1 = db.getData("/programas")[0];
-//var runningPrograms = db.getData("/running");
+
 var assignedPrograms = {};
+
+var loadAssignedPrograms = function () {
+    try {
+        assignedPrograms = db.getData("/running");
+    } catch (error) {
+        assignedPrograms = {};
+    }
+};
+
+loadAssignedPrograms();
 
 var getCurrentStep = function (programa) {
     var now = new Date().getTime();
@@ -39,11 +45,12 @@ var schedule = function (programaBase, startTime) {
 };
 
 var run = function () {
-    var p1 = schedule(programa1, new Date().getTime() + 3000);
+    /*var p1 = schedule(programa1, new Date().getTime() + 3000);
     var p2 = schedule(programa1, new Date().getTime() + 7000);
-    //db.push("/running/t1",programa1);
     assignedPrograms.t1 = p1;
     assignedPrograms.t2 = p2;
+
+    db.push("/running", assignedPrograms);*/
 
     setInterval(sendFakeData, 1000);
 };
