@@ -1,0 +1,27 @@
+{
+    "programas": [
+        {
+            "nombre": "basico",
+            "descripcion": "La primer receta y la mas usada",
+            "pasos": [
+                {
+                    "paso": "primer paso",
+                    "duracion": 10000,
+                    "temperatura": 15
+                },
+                {
+                    "paso": "segundo paso",
+                    "duracion": 4000,
+                    "temperatura": 18
+                },
+                {
+                    "paso": "tercer paso",
+                    "duracion": 14000,
+                    "temperatura": 23
+                }
+            ]
+        }
+    ],
+    "running": [
+    ]
+}

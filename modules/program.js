@@ -1,75 +1,109 @@
+var JsonDB = require('node-json-db');
+
+var db = new JsonDB("programas", true, true);
+
+
+
 const adapter = require('./sensorAdapter.js');
 
-var programa1 = [
-    {
-        paso: "primer paso",
-        duracion: 10000,
-        temperatura: 15
-    },
-    {
-        paso: "segundo paso",
-        duracion: 4000,
-        temperatura: 18
-    },
-    {
-        paso: "tercer paso",
-        duracion: 14000,
-        temperatura: 23
-    }
-];
+var programa1 = db.getData("/programas")[0];
+//var runningPrograms = db.getData("/running");
+var assignedPrograms = {};
 
 var getCurrentStep = function (programa) {
     var now = new Date().getTime();
+    var pasos = programa.pasos;
     var curSetp = null;
-    for (var i = 0; i < programa.length; i++) {
-        if (programa[i].startTime <= now && programa[i].endTime >= now) {
-            curSetp = programa[i];
+    for (var i = 0; i < pasos.length; i++) {
+        if (pasos[i].startTime <= now && pasos[i].endTime >= now) {
+            curSetp = pasos[i];
         }
     }
     return curSetp;
 
 };
 
-var setTimes = function (programa) {
-    var now = new Date().getTime() + 5000;//empeza dentro de 5 segundos
-    for (var i = 0; i < programa.length; i++) {
+var schedule = function (programaBase, startTime) {
+    var programa = JSON.parse(JSON.stringify(programaBase)); // copia del array, sin referencias
+    var pasos = programa.pasos;
+    for (var i = 0; i < pasos.length; i++) {
         if (i === 0) {
-            programa[i].startTime = now;
-            programa[i].endTime = programa[i].duracion + now;
+            pasos[i].startTime = startTime;
+            pasos[i].endTime = pasos[i].duracion + startTime;
         } else {
-            programa[i].startTime = programa[i - 1].endTime + 1;// +1 de changui
-            programa[i].endTime = programa[i].startTime + programa[i].duracion;
+            pasos[i].startTime = pasos[i - 1].endTime + 1;// +1 de changui
+            pasos[i].endTime = pasos[i].startTime + pasos[i].duracion;
         }
-
     }
+    return programa;
 };
 
 var run = function () {
-    setTimes(programa1);
+    var p1 = schedule(programa1, new Date().getTime() + 3000);
+    var p2 = schedule(programa1, new Date().getTime() + 7000);
+    //db.push("/running/t1",programa1);
+    assignedPrograms.t1 = p1;
+    assignedPrograms.t2 = p2;
+
     setInterval(sendFakeData, 1000);
 };
 
-var sendFakeData = function(){
+var sendFakeData = function () {
     monitor("0;23;24;25;26;23;24;25;26;0;0;0;0;");
+};
+
+var getCurrentValue = function (tacho, jsonData) {
+    var clave = tacho.replace("t", "m"); //t1-> m1 .. y todo asi
+    return jsonData[clave];
+
+};
+
+var adjust = function (tacho, value) {
+    console.log(tacho + "->" + value);
+};
+
+var adjustIfYouMust = function (tacho, jsonData) {
+    var step = getCurrentStep(assignedPrograms[tacho]);
+    var currentValue = getCurrentValue(tacho, jsonData);
+    if (step != null && currentValue != step.temperatura) {
+        adjust(tacho, step.temperatura);
+    }
+
+};
+
+var ultimoPasoTime = function (programa) {
+    return programa.pasos[programa.pasos.length - 1].endTime;
+};
+
+var tieneProgramaActivo = function (tacho) {
+    var programa = assignedPrograms[tacho];
+    if (programa) {
+        var now = new Date().getTime();
+        return ultimoPasoTime(programa) > now;
+    } else {
+        return false;
+    }
+};
+
+var getTachosConActivePrograms = function () {
+    var tachos = Object.keys(assignedPrograms);
+    var activos = [];
+    tachos.forEach(function (tacho) {
+        if (tieneProgramaActivo(tacho)) {
+            activos.push(tacho);
+        }
+    });
+    return activos;
 };
 
 var monitor = function (sensorData) {
     var jsonData = adapter.asJson(sensorData);
-    var step = getCurrentStep(programa1);
-    if (step!=null && jsonData.m1 != step.temperatura){
-        console.log(step.paso);
-        console.log("step.temperatura "+step.temperatura);
-        console.log("jsonData.m1 "+jsonData.m1);
-        
-        console.log("ajusto temperatura");
-        
-    } else {
-        console.log("nada...");
-    }
-    // 1. ver si hay algun programa corriendo para cada tacho
-    // 2. si hay programa, obtener paso actual del programa
-    // 3. si la temperatura maxima del tacho es diferente a la del programa -> ajustar
-    // para la prueba asumo que programa1 esta corriendo para el tacho1
+    var tachos = getTachosConActivePrograms();
+    console.log(tachos);
+    tachos.forEach(function (tacho) {
+        adjustIfYouMust(tacho, jsonData);
+    });
+
 };
 
 
