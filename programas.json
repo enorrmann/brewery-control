@@ -6,17 +6,38 @@
             "pasos": [
                 {
                     "paso": "primer paso",
-                    "duracion": 10000,
+                    "duracion": 3600000,
                     "temperatura": 15
                 },
                 {
                     "paso": "segundo paso",
-                    "duracion": 4000,
+                    "duracion": 3600000,
                     "temperatura": 18
                 },
                 {
                     "paso": "tercer paso",
-                    "duracion": 14000,
+                    "duracion": 3600000,
+                    "temperatura": 23
+                }
+            ]
+        },
+        {
+            "nombre": "uno mas largo",
+            "descripcion": "La primer receta y la mas usada pero mas larga",
+            "pasos": [
+                {
+                    "paso": "primer paso",
+                    "duracion": 6600000,
+                    "temperatura": 15
+                },
+                {
+                    "paso": "segundo paso",
+                    "duracion": 8600000,
+                    "temperatura": 18
+                },
+                {
+                    "paso": "tercer paso",
+                    "duracion": 9600000,
                     "temperatura": 23
                 }
             ]
@@ -29,24 +50,24 @@
             "pasos": [
                 {
                     "paso": "primer paso",
-                    "duracion": 10000,
+                    "duracion": 3600000,
                     "temperatura": 15,
-                    "startTime": 1536176202121,
-                    "endTime": 1536176212121
+                    "startTime": 1536343435825,
+                    "endTime": 1536347035825
                 },
                 {
                     "paso": "segundo paso",
-                    "duracion": 4000,
+                    "duracion": 3600000,
                     "temperatura": 18,
-                    "startTime": 1536176212122,
-                    "endTime": 1536176216122
+                    "startTime": 1536347035826,
+                    "endTime": 1536350635826
                 },
                 {
                     "paso": "tercer paso",
-                    "duracion": 14000,
+                    "duracion": 3600000,
                     "temperatura": 23,
-                    "startTime": 1536176216123,
-                    "endTime": 1536176230123
+                    "startTime": 1536350635827,
+                    "endTime": 1536354235827
                 }
             ]
         },
@@ -56,24 +77,24 @@
             "pasos": [
                 {
                     "paso": "primer paso",
-                    "duracion": 10000,
+                    "duracion": 3600000,
                     "temperatura": 15,
-                    "startTime": 1536176206121,
-                    "endTime": 1536176216121
+                    "startTime": 1536343439825,
+                    "endTime": 1536347039825
                 },
                 {
                     "paso": "segundo paso",
-                    "duracion": 4000,
+                    "duracion": 3600000,
                     "temperatura": 18,
-                    "startTime": 1536176216122,
-                    "endTime": 1536176220122
+                    "startTime": 1536347039826,
+                    "endTime": 1536350639826
                 },
                 {
                     "paso": "tercer paso",
-                    "duracion": 14000,
+                    "duracion": 3600000,
                     "temperatura": 23,
-                    "startTime": 1536176220123,
-                    "endTime": 1536176234123
+                    "startTime": 1536350639827,
+                    "endTime": 1536354239827
                 }
             ]
         }

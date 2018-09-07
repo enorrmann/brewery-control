@@ -14,6 +14,7 @@ var path = require('path');
 
 program.run();
 
+
 passport.use(new Strategy(
         function (username, password, cb) {
             db.users.findByUsername(username, function (err, user) {
@@ -129,6 +130,13 @@ app.get('/entries', function (req, res) {
         res.status(200).send(items);
     });
 });
+app.get('/programas', function (req, res) {
+    res.status(200).send(program.getProgramas());
+});
+app.get('/assignedPrograms', function (req, res) {
+    res.status(200).send(program.getAssignedPrograms());
+});
+
 
 var initPort = function (puerto) {
     var self = this;

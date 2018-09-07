@@ -6,6 +6,16 @@ var programa1 = db.getData("/programas")[0];
 
 var assignedPrograms = {};
 
+var getProgramas = function () {
+    return db.getData("/programas");
+};
+
+var getAssignedPrograms = function () {
+    return assignedPrograms;
+};
+
+
+
 var loadAssignedPrograms = function () {
     try {
         assignedPrograms = db.getData("/running");
@@ -45,14 +55,14 @@ var schedule = function (programaBase, startTime) {
 };
 
 var run = function () {
-    /*var p1 = schedule(programa1, new Date().getTime() + 3000);
-    var p2 = schedule(programa1, new Date().getTime() + 7000);
-    assignedPrograms.t1 = p1;
-    assignedPrograms.t2 = p2;
+    var p1 = schedule(programa1, new Date().getTime() + 3000);
+     var p2 = schedule(programa1, new Date().getTime() + 7000);
+     assignedPrograms.t1 = p1;
+     assignedPrograms.t2 = p2;
+     
+     db.push("/running", assignedPrograms);
 
-    db.push("/running", assignedPrograms);*/
-
-    setInterval(sendFakeData, 1000);
+    //setInterval(sendFakeData, 1000);
 };
 
 var sendFakeData = function () {
@@ -106,7 +116,6 @@ var getTachosConActivePrograms = function () {
 var monitor = function (sensorData) {
     var jsonData = adapter.asJson(sensorData);
     var tachos = getTachosConActivePrograms();
-    console.log(tachos);
     tachos.forEach(function (tacho) {
         adjustIfYouMust(tacho, jsonData);
     });
@@ -115,6 +124,8 @@ var monitor = function (sensorData) {
 
 
 module.exports = {
+    monitor: monitor,
     run: run,
-    monitor: monitor
+    getProgramas: getProgramas,
+    getAssignedPrograms: getAssignedPrograms
 };
