@@ -54,15 +54,16 @@ var schedule = function (programaBase, startTime) {
     return programa;
 };
 
-var run = function () {
-    var p1 = schedule(programa1, new Date().getTime() + 3000);
-     var p2 = schedule(programa1, new Date().getTime() + 7000);
-     assignedPrograms.t1 = p1;
-     assignedPrograms.t2 = p2;
-     
-     db.push("/running", assignedPrograms);
+var assign = function (data) {
+    var now = new Date().getTime();
+    var tacho = data.tacho;
+    var programa = data.programa;
 
-    //setInterval(sendFakeData, 1000);
+    var agendado = schedule(programa, now);
+    assignedPrograms[tacho] = agendado;
+    db.push("/running", assignedPrograms);
+
+
 };
 
 var sendFakeData = function () {
@@ -125,7 +126,7 @@ var monitor = function (sensorData) {
 
 module.exports = {
     monitor: monitor,
-    run: run,
     getProgramas: getProgramas,
-    getAssignedPrograms: getAssignedPrograms
+    getAssignedPrograms: getAssignedPrograms,
+    assign: assign
 };

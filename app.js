@@ -11,9 +11,9 @@ const logger = require('./modules/simpleDb.js');
 const db = require('./users');
 const program = require('./modules/program.js');
 var path = require('path');
-
-program.run();
-
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 passport.use(new Strategy(
         function (username, password, cb) {
@@ -136,7 +136,9 @@ app.get('/programas', function (req, res) {
 app.get('/assignedPrograms', function (req, res) {
     res.status(200).send(program.getAssignedPrograms());
 });
-
+app.post('/assignedPrograms', function (req, res) {
+    res.status(200).send(program.assign(req.body));
+});
 
 var initPort = function (puerto) {
     var self = this;

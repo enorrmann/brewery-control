@@ -1,28 +1,28 @@
 {
     "programas": [
         {
-            "nombre": "basico",
+            "nombre": "Ottra Receta Tradicional",
             "descripcion": "La primer receta y la mas usada",
             "pasos": [
                 {
-                    "paso": "primer paso",
+                    "paso": "Fermentacion principal",
                     "duracion": 3600000,
                     "temperatura": 15
                 },
                 {
-                    "paso": "segundo paso",
+                    "paso": "Guarda Caliente",
                     "duracion": 3600000,
                     "temperatura": 18
                 },
                 {
-                    "paso": "tercer paso",
+                    "paso": "Enfriamiento",
                     "duracion": 3600000,
                     "temperatura": 23
                 }
             ]
         },
         {
-            "nombre": "uno mas largo",
+            "nombre": "Ottra Pale Ale",
             "descripcion": "La primer receta y la mas usada pero mas larga",
             "pasos": [
                 {
@@ -45,56 +45,110 @@
     ],
     "running": {
         "t1": {
-            "nombre": "basico",
+            "nombre": "Ottra Receta Tradicional",
             "descripcion": "La primer receta y la mas usada",
             "pasos": [
                 {
-                    "paso": "primer paso",
+                    "paso": "Fermentacion principal",
                     "duracion": 3600000,
                     "temperatura": 15,
-                    "startTime": 1536343435825,
-                    "endTime": 1536347035825
+                    "startTime": 1536345658317,
+                    "endTime": 1536349258317
                 },
                 {
-                    "paso": "segundo paso",
+                    "paso": "Guarda Caliente",
                     "duracion": 3600000,
                     "temperatura": 18,
-                    "startTime": 1536347035826,
-                    "endTime": 1536350635826
+                    "startTime": 1536349258318,
+                    "endTime": 1536352858318
                 },
                 {
-                    "paso": "tercer paso",
+                    "paso": "Enfriamiento",
                     "duracion": 3600000,
                     "temperatura": 23,
-                    "startTime": 1536350635827,
-                    "endTime": 1536354235827
+                    "startTime": 1536352858319,
+                    "endTime": 1536356458319
                 }
             ]
         },
         "t2": {
-            "nombre": "basico",
-            "descripcion": "La primer receta y la mas usada",
+            "nombre": "Ottra Pale Ale",
+            "descripcion": "La primer receta y la mas usada pero mas larga",
             "pasos": [
                 {
                     "paso": "primer paso",
-                    "duracion": 3600000,
+                    "duracion": 6600000,
                     "temperatura": 15,
-                    "startTime": 1536343439825,
-                    "endTime": 1536347039825
+                    "startTime": 1536345660284,
+                    "endTime": 1536352260284
                 },
                 {
                     "paso": "segundo paso",
-                    "duracion": 3600000,
+                    "duracion": 8600000,
                     "temperatura": 18,
-                    "startTime": 1536347039826,
-                    "endTime": 1536350639826
+                    "startTime": 1536352260285,
+                    "endTime": 1536360860285
                 },
                 {
                     "paso": "tercer paso",
+                    "duracion": 9600000,
+                    "temperatura": 23,
+                    "startTime": 1536360860286,
+                    "endTime": 1536370460286
+                }
+            ]
+        },
+        "t3": {
+            "nombre": "Ottra Receta Tradicional",
+            "descripcion": "La primer receta y la mas usada",
+            "pasos": [
+                {
+                    "paso": "Fermentacion principal",
+                    "duracion": 3600000,
+                    "temperatura": 15,
+                    "startTime": 1536345732614,
+                    "endTime": 1536349332614
+                },
+                {
+                    "paso": "Guarda Caliente",
+                    "duracion": 3600000,
+                    "temperatura": 18,
+                    "startTime": 1536349332615,
+                    "endTime": 1536352932615
+                },
+                {
+                    "paso": "Enfriamiento",
                     "duracion": 3600000,
                     "temperatura": 23,
-                    "startTime": 1536350639827,
-                    "endTime": 1536354239827
+                    "startTime": 1536352932616,
+                    "endTime": 1536356532616
+                }
+            ]
+        },
+        "t4": {
+            "nombre": "Ottra Pale Ale",
+            "descripcion": "La primer receta y la mas usada pero mas larga",
+            "pasos": [
+                {
+                    "paso": "primer paso",
+                    "duracion": 6600000,
+                    "temperatura": 15,
+                    "startTime": 1536345736321,
+                    "endTime": 1536352336321
+                },
+                {
+                    "paso": "segundo paso",
+                    "duracion": 8600000,
+                    "temperatura": 18,
+                    "startTime": 1536352336322,
+                    "endTime": 1536360936322
+                },
+                {
+                    "paso": "tercer paso",
+                    "duracion": 9600000,
+                    "temperatura": 23,
+                    "startTime": 1536360936323,
+                    "endTime": 1536370536323
                 }
             ]
         }
