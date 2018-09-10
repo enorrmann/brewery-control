@@ -13,6 +13,11 @@ app.controller('programaCtrl', function ($scope, $resource) {
         return url.save({}, programaTacho).$promise;
     };
 
+    var remove = function (tacho) {
+        var url = $resource('assignedPrograms/:id');
+        return url.delete({id: tacho}).$promise;
+    };
+
     var getAllPrograms = function () {
         var url = $resource('programas');
         return url.query().$promise;
@@ -27,6 +32,12 @@ app.controller('programaCtrl', function ($scope, $resource) {
 
         };
         assign(data).then(function (data) {
+            init();
+        });
+    };
+
+    $scope.quitarPrograma = function (tacho) {
+        remove(tacho).then(function (data) {
             init();
         });
     };

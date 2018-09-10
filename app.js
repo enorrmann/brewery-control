@@ -140,6 +140,10 @@ app.post('/assignedPrograms', function (req, res) {
     res.status(200).send(program.assign(req.body));
 });
 
+app.delete('/assignedPrograms/:tacho', function (req, res) {
+    res.status(200).send(program.remove(req.params.tacho));
+});
+
 var initPort = function (puerto) {
     var self = this;
     if (self.connected == true) {

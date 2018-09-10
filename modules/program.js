@@ -62,8 +62,11 @@ var assign = function (data) {
     var agendado = schedule(programa, now);
     assignedPrograms[tacho] = agendado;
     db.push("/running", assignedPrograms);
+};
 
-
+var remove = function (tacho) {
+    delete assignedPrograms[tacho];
+    db.push("/running", assignedPrograms);
 };
 
 var sendFakeData = function () {
@@ -128,5 +131,6 @@ module.exports = {
     monitor: monitor,
     getProgramas: getProgramas,
     getAssignedPrograms: getAssignedPrograms,
-    assign: assign
+    assign: assign,
+    remove: remove,
 };

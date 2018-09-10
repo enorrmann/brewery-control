@@ -85,7 +85,7 @@
                                     <label>Seleccione un programa para correr en este tacho</label>
                                     <select class="form-control"ng-model="seleccion.programa" ng-options="programa as programa.nombre for programa in programas">
                                     </select>
-                                    <button type="submit" ng-click="iniciarPrograma(tacho)" class="btn btn-default">Iniciar programa</button>
+                                    <button type="submit" ng-click="iniciarPrograma(tacho)" class="btn btn-success">Iniciar programa</button>
                                 </div>
 
 
@@ -107,11 +107,12 @@
                                                 <td>{{paso.paso}}</td>
                                                 <td>{{paso.startTime| date  : 'dd/MM hh:mm'}}</td>
                                                 <td>{{paso.endTime| date  : 'dd/MM hh:mm'}}</td>
-                                                <td>{{paso.duracion}}</td>
+                                                <td>{{paso.duracion / 3600000}}</td>
                                                 <td>{{paso.temperatura}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <button type="submit" ng-click="quitarPrograma(tacho)" class="btn btn-danger pull-right">Finalizar programa</button>
                                 </div>
                                 <!-- /.table-responsive -->
                             </div>
