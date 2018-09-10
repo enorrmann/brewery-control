@@ -41,6 +41,10 @@ app.controller('programaCtrl', function ($scope, $resource) {
             init();
         });
     };
+    
+    $scope.seleccionar = function(programa){
+        $scope.seleccion.programa = programa;
+    };
 
 
     var init = function () {
