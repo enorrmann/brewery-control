@@ -92,7 +92,7 @@ var adjust = function (tacho, value) {
 var adjustIfYouMust = function (tacho, jsonData) {
     var step = getCurrentStep(assignedPrograms[tacho]);
     var currentValue = getCurrentValue(tacho, jsonData);
-    var stepTemp = step.temperatura+'.00';
+    var stepTemp = step.temperatura + '.00';
     if (step != null && currentValue != stepTemp) {
         adjust(tacho, step.temperatura);
     }
@@ -140,5 +140,6 @@ module.exports = {
     getAssignedPrograms: getAssignedPrograms,
     assign: assign,
     remove: remove,
-    save: save
+    save: save,
+    tieneProgramaActivo: tieneProgramaActivo
 };
