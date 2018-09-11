@@ -81,7 +81,6 @@ var sendFakeData = function () {
 
 var getCurrentValue = function (tacho, jsonData) {
     var clave = tacho.replace("t", "m"); //t1-> m1 .. y todo asi
-    console.log(jsonData);
     return jsonData[clave];
 
 };
@@ -95,8 +94,6 @@ var adjustIfYouMust = function (tacho, jsonData) {
     var currentValue = getCurrentValue(tacho, jsonData);
     var stepTemp = step.temperatura+'.00';
     if (step != null && currentValue != stepTemp) {
-        console.log(currentValue);
-        console.log(stepTemp);
         adjust(tacho, step.temperatura);
     }
 
