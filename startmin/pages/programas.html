@@ -83,12 +83,12 @@
                     <div class="col-lg-6" ng-repeat="tacho in tachos">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Tacho {{tacho}} {{assignedPrograms[tacho].nombre}}
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Fermentador {{tacho}} {{assignedPrograms[tacho].nombre}}
                             </div>
                             <div class="panel-body">
 
                                 <div class="form-grosup" ng-if="!assignedPrograms[tacho]">
-                                    <label>Seleccione un programa para correr en este tacho</label>
+                                    <label>Seleccione un programa para correr en este fermentador</label>
                                     <select class="form-control"ng-model="seleccion.programa" ng-options="programa as programa.nombre for programa in programas">
                                     </select>
                                     <button type="submit" ng-click="iniciarPrograma(tacho)" class="btn btn-success">Iniciar programa</button>
