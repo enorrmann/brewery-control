@@ -1,5 +1,6 @@
 var asJson = function (sensorData) {
     var dataArray = sensorData.split(";");
+    console.log(dataArray);
     var newData =
             {
                 status: dataArray[0],
