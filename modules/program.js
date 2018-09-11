@@ -124,6 +124,7 @@ var getTachosConActivePrograms = function () {
 };
 
 var monitor = function (sensorData) {
+    console.log(sensorData);
     var jsonData = adapter.asJson(sensorData);
     var tachos = getTachosConActivePrograms();
     tachos.forEach(function (tacho) {
