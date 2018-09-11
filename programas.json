@@ -90,19 +90,6 @@
                     "endTime": 1537192331537
                 }
             ]
-        },
-        "t2": {
-            "nombre": "Cerveza verde",
-            "pasos": [
-                {
-                    "paso": "Primer paso",
-                    "duracion": 518400000,
-                    "temperatura": "24",
-                    "dias": "6",
-                    "startTime": 1536673977689,
-                    "endTime": 1537192377689
-                }
-            ]
         }
     }
 }
