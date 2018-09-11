@@ -12,16 +12,20 @@ const db = require('./users');
 const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
 
-myEvents.on("adjust", function(data) {
-    var codTacho = data.tacho.replace('t','S');
+myEvents.on("adjust", function (data) {
+    var codTacho = data.tacho.replace('t', 'S');
     var maximo = data.value;
-    var codigoAEnviar = codTacho+'X0' + maximo + 'E';
+    var codigoAEnviar = codTacho + 'X0' + maximo + 'E';
+    if (port && port !== null) {
+        port.write(codigoAEnviar);
+    }
+
     console.log(codigoAEnviar);
 });
 
 var path = require('path');
 var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 passport.use(new Strategy(
