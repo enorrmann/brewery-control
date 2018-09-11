@@ -76,19 +76,15 @@ var maxArray = defaults.split(";");
 
 var sendDefaults = function () {
     if (!program.tieneProgramaActivo('t1')) {
-        console.log('sendt1');
         port.write('S1X0' + maxArray[0] + 'E');
     }
     if (!program.tieneProgramaActivo('t2')) {
-        console.log('sendt2');
         port.write('S2X0' + maxArray[1] + 'E');
     }
     if (!program.tieneProgramaActivo('t3')) {
-        console.log('sendt3');
         port.write('S3X0' + maxArray[2] + 'E');
     }
     if (!program.tieneProgramaActivo('t4')) {
-        console.log('sendt4');
         port.write('S4X0' + maxArray[3] + 'E');
     }
 };
