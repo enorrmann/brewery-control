@@ -43,6 +43,9 @@ var schedule = function (programaBase, startTime) {
     var programa = JSON.parse(JSON.stringify(programaBase)); // copia del array, sin referencias
     var pasos = programa.pasos;
     for (var i = 0; i < pasos.length; i++) {
+        pasos[i].duracion = pasos[i].dias * 86400000; // duracion de un dia en milisegundos
+    }
+    for (var i = 0; i < pasos.length; i++) {
         if (i === 0) {
             pasos[i].startTime = startTime;
             pasos[i].endTime = pasos[i].duracion + startTime;
@@ -62,6 +65,9 @@ var assign = function (data) {
     var agendado = schedule(programa, now);
     assignedPrograms[tacho] = agendado;
     db.push("/running", assignedPrograms);
+};
+var save = function (programas) {
+    db.push("/programas", programas);
 };
 
 var remove = function (tacho) {
@@ -133,4 +139,5 @@ module.exports = {
     getAssignedPrograms: getAssignedPrograms,
     assign: assign,
     remove: remove,
+    save: save
 };

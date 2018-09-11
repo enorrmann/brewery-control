@@ -57,7 +57,10 @@
                                 <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Panel de control </a>
                             </li>
                             <li>
-                                <a href="histograma.html" class="active"><i class="fa fa-dashboard fa-fw"></i> Histograma </a>
+                                <a href="histograma.html"><i class="fa fa-dashboard fa-fw"></i> Histograma </a>
+                            </li>
+                            <li>
+                                <a href="recetas.html"><i class="fa fa-dashboard fa-fw"></i> Programas</a>
                             </li>
                         </ul>
                     </div>
@@ -97,7 +100,7 @@
                                                 <th>Paso</th>
                                                 <th>Inicio</th>
                                                 <th>Fin</th>
-                                                <th>Duracion</th>
+                                                <th>Dias</th>
                                                 <th>Temperatura</th>
                                             </tr>
                                         </thead>
@@ -107,7 +110,7 @@
                                                 <td>{{paso.paso}}</td>
                                                 <td>{{paso.startTime| date  : 'dd/MM hh:mm'}}</td>
                                                 <td>{{paso.endTime| date  : 'dd/MM hh:mm'}}</td>
-                                                <td>{{paso.duracion / 3600000}}</td>
+                                                <td>{{paso.dias}}</td>
                                                 <td>{{paso.temperatura}}</td>
                                             </tr>
                                         </tbody>

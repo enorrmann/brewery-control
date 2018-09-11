@@ -7,17 +7,20 @@
                 {
                     "paso": "Fermentacion principal",
                     "duracion": 86400000,
-                    "temperatura": 15
+                    "temperatura": 15,
+                    "dias": "1"
                 },
                 {
                     "paso": "Guarda Caliente",
                     "duracion": 172800000,
-                    "temperatura": 18
+                    "temperatura": 18,
+                    "dias": "2"
                 },
                 {
                     "paso": "Enfriamiento",
                     "duracion": 172800000,
-                    "temperatura": 23
+                    "temperatura": 23,
+                    "dias": "3"
                 }
             ]
         },
@@ -28,76 +31,36 @@
                 {
                     "paso": "primer paso",
                     "duracion": 6600000,
-                    "temperatura": 15
+                    "temperatura": 15,
+                    "dias": "3"
                 },
                 {
                     "paso": "segundo paso",
                     "duracion": 8600000,
-                    "temperatura": 18
+                    "temperatura": 18,
+                    "dias": "4"
                 },
                 {
                     "paso": "tercer paso",
                     "duracion": 9600000,
-                    "temperatura": 23
+                    "temperatura": 23,
+                    "dias": "5"
+                }
+            ]
+        },
+        {
+            "nombre": "Cerveza verde",
+            "pasos": [
+                {
+                    "paso": "Primer paso",
+                    "duracion": "2",
+                    "temperatura": "24",
+                    "dias": "6"
                 }
             ]
         }
     ],
     "running": {
-        "t2": {
-            "nombre": "Ottra Receta Tradicional",
-            "descripcion": "La primer receta y la mas usada",
-            "pasos": [
-                {
-                    "paso": "Fermentacion principal",
-                    "duracion": 3600000,
-                    "temperatura": 15,
-                    "startTime": 1536607514799,
-                    "endTime": 1536611114799
-                },
-                {
-                    "paso": "Guarda Caliente",
-                    "duracion": 3600000,
-                    "temperatura": 18,
-                    "startTime": 1536611114800,
-                    "endTime": 1536614714800
-                },
-                {
-                    "paso": "Enfriamiento",
-                    "duracion": 3600000,
-                    "temperatura": 23,
-                    "startTime": 1536614714801,
-                    "endTime": 1536618314801
-                }
-            ]
-        },
-        "t3": {
-            "nombre": "Ottra Receta Tradicional",
-            "descripcion": "La primer receta y la mas usada",
-            "pasos": [
-                {
-                    "paso": "Fermentacion principal",
-                    "duracion": 3600000,
-                    "temperatura": 15,
-                    "startTime": 1536607515782,
-                    "endTime": 1536611115782
-                },
-                {
-                    "paso": "Guarda Caliente",
-                    "duracion": 3600000,
-                    "temperatura": 18,
-                    "startTime": 1536611115783,
-                    "endTime": 1536614715783
-                },
-                {
-                    "paso": "Enfriamiento",
-                    "duracion": 3600000,
-                    "temperatura": 23,
-                    "startTime": 1536614715784,
-                    "endTime": 1536618315784
-                }
-            ]
-        },
         "t1": {
             "nombre": "Ottra Receta Tradicional",
             "descripcion": "La primer receta y la mas usada",
@@ -106,22 +69,38 @@
                     "paso": "Fermentacion principal",
                     "duracion": 86400000,
                     "temperatura": 15,
-                    "startTime": 1536608196460,
-                    "endTime": 1536694596460
+                    "dias": "1",
+                    "startTime": 1536673931535,
+                    "endTime": 1536760331535
                 },
                 {
                     "paso": "Guarda Caliente",
                     "duracion": 172800000,
                     "temperatura": 18,
-                    "startTime": 1536694596461,
-                    "endTime": 1536867396461
+                    "dias": "2",
+                    "startTime": 1536760331536,
+                    "endTime": 1536933131536
                 },
                 {
                     "paso": "Enfriamiento",
-                    "duracion": 172800000,
+                    "duracion": 259200000,
                     "temperatura": 23,
-                    "startTime": 1536867396462,
-                    "endTime": 1537040196462
+                    "dias": "3",
+                    "startTime": 1536933131537,
+                    "endTime": 1537192331537
+                }
+            ]
+        },
+        "t2": {
+            "nombre": "Cerveza verde",
+            "pasos": [
+                {
+                    "paso": "Primer paso",
+                    "duracion": 518400000,
+                    "temperatura": "24",
+                    "dias": "6",
+                    "startTime": 1536673977689,
+                    "endTime": 1537192377689
                 }
             ]
         }

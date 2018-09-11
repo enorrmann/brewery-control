@@ -57,7 +57,10 @@
                                 <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Panel de control </a>
                             </li>
                             <li>
-                                <a href="histograma.html" class="active"><i class="fa fa-dashboard fa-fw"></i> Histograma </a>
+                                <a href="histograma.html"><i class="fa fa-dashboard fa-fw"></i> Histograma </a>
+                            </li>
+                            <li>
+                                <a href="recetas.html"  class="active"><i class="fa fa-dashboard fa-fw"></i> Programas</a>
                             </li>
                         </ul>
                     </div>
@@ -66,7 +69,7 @@
             <div id="page-wrapper" ng-app="myApp" ng-controller="programaCtrl">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Recetas</h1>
+                        <h1 class="page-header">Editor de programas</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -82,25 +85,43 @@
                             </div>
 
                             <div class="panel-body">
-                                <div class="list-group">
-                                    <a href="#" ng-click="seleccionar(programa)" class="list-group-item" ng-repeat="programa in programas">
-                                        <i class="fa fa-comment fa-fw"></i> {{programa.nombre}}
-                                        <span class="pull-right text-muted small"><em>{{programa.duracion}}</em>
-                                        </span>
-                                    </a>
-
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nombre</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-click="seleccionar(programa)" ng-repeat="programa in programas"> 
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{programa.nombre}}</td>
+                                                <td><button type="button" ng-click="eliminarPrograma($index)" class="btn btn-warning btn-circle"><i class="fa fa-minus"></i></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td><td><button type="button" ng-click="nuevoPrograma()" class="btn btn-primary btn-circle"><i class="fa fa-plus"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                     <!-- /.panel tabla registros -->
 
-                    <!-- panel grafico -->
+                    <!-- pasos no editable -->
                     <div class="col-lg-8">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Receta {{seleccion.programa.nombre}}
+                            <div class="panel-heading" ng-if="!editandoReceta">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> {{seleccion.programa.nombre}}
                             </div>
+                            <div class="panel-heading" ng-if="editandoReceta">
+                                <input ng-model="seleccion.programa.nombre" class="form-control" placeholder="Nombre del programa">
+                            </div>
+
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table">
@@ -108,25 +129,32 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Paso</th>
-                                                <th>Tiempo</th>
+                                                <th>Dias</th>
                                                 <th>Temperatura</th>
+                                                <th ng-if="editandoReceta"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="paso in seleccion.programa.pasos"> 
                                                 <td>{{$index + 1}}</td>
-                                                <td>{{paso.paso}}</td>
-                                                <td>{{paso.duracion}}</td>
-                                                <td>{{paso.temperatura}}</td>
+                                                <td ng-if="!editandoReceta">{{paso.paso}}</td><td ng-if="editandoReceta"><input ng-model="paso.paso" class="form-control" placeholder="Nombre del paso"></td>
+                                                <td ng-if="!editandoReceta">{{paso.dias}}</td><td ng-if="editandoReceta"><input ng-model="paso.dias" class="form-control" placeholder="Duracion en dias"></td>
+                                                <td ng-if="!editandoReceta">{{paso.temperatura}}</td><td ng-if="editandoReceta"><input ng-model="paso.temperatura" class="form-control" placeholder="Temperatura"></td>
+                                                <td ng-if="editandoReceta"><button type="button" ng-click="eliminarPaso($index)" class="btn btn-warning btn-circle"><i class="fa fa-minus"></i></button></td>
+                                            </tr>
+                                            <tr ng-if="editandoReceta">
+                                                <td colspan="4"></td><td><button type="button" ng-click="agregarPaso()" class="btn btn-primary btn-circle"><i class="fa fa-plus"></i></button></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- /.table-responsive -->
+
+                                <button ng-if="!editandoReceta" type="submit" ng-click="editStart()" class="btn btn-primary btn-block">Editar</button>
+                                <button ng-if="editandoReceta" type="submit" ng-click="guardar()" class="btn btn-success btn-block">Guardar</button>
                             </div>
                         </div>
                     </div>
-                    <!-- /panel grafico -->
+                    <!-- pasos no editable -->
 
                 </div>
                 <!-- /.row -->

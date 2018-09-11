@@ -133,6 +133,10 @@ app.get('/entries', function (req, res) {
 app.get('/programas', function (req, res) {
     res.status(200).send(program.getProgramas());
 });
+app.post('/programas', function (req, res) {
+    res.status(200).send(program.save(req.body));
+});
+
 app.get('/assignedPrograms', function (req, res) {
     res.status(200).send(program.getAssignedPrograms());
 });
