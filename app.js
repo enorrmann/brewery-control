@@ -13,7 +13,10 @@ const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
 
 myEvents.on("adjust", function(data) {
-    console.log(data);
+    var codTacho = data.tacho.replace('t','S');
+    var maximo = data.value;
+    var codigoAEnviar = codTacho+'X0' + maximo + 'E';
+    console.log(codigoAEnviar);
 });
 
 var path = require('path');
