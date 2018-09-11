@@ -92,7 +92,8 @@ var adjust = function (tacho, value) {
 var adjustIfYouMust = function (tacho, jsonData) {
     var step = getCurrentStep(assignedPrograms[tacho]);
     var currentValue = getCurrentValue(tacho, jsonData);
-    if (step != null && currentValue != step.temperatura) {
+    var stepTemp = step.temperatura+'.00';
+    if (step != null && currentValue != stepTemp) {
         adjust(tacho, step.temperatura);
     }
 
@@ -124,7 +125,6 @@ var getTachosConActivePrograms = function () {
 };
 
 var monitor = function (sensorData) {
-    console.log(sensorData);
     var jsonData = adapter.asJson(sensorData);
     var tachos = getTachosConActivePrograms();
     tachos.forEach(function (tacho) {
