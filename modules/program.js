@@ -1,8 +1,8 @@
 var JsonDB = require('node-json-db');
 var db = new JsonDB("programas", true, true);
 const adapter = require('./sensorAdapter.js');
+var myEvents = require('./myEvents.js');
 
-var programa1 = db.getData("/programas")[0];
 
 var assignedPrograms = {};
 
@@ -86,7 +86,7 @@ var getCurrentValue = function (tacho, jsonData) {
 };
 
 var adjust = function (tacho, value) {
-    console.log(tacho + "->" + value);
+    myEvents.emit("adjust", {tacho: tacho, value: value});
 };
 
 var adjustIfYouMust = function (tacho, jsonData) {

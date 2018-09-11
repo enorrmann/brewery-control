@@ -10,6 +10,12 @@ const fs = require('fs');
 const logger = require('./modules/simpleDb.js');
 const db = require('./users');
 const program = require('./modules/program.js');
+var myEvents = require('./modules/myEvents.js');
+
+myEvents.on("adjust", function(data) {
+    console.log(data);
+});
+
 var path = require('path');
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
