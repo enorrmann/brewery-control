@@ -94,6 +94,8 @@ var adjustIfYouMust = function (tacho, jsonData) {
     var currentValue = getCurrentValue(tacho, jsonData);
     var stepTemp = step.temperatura+'.00';
     if (step != null && currentValue != stepTemp) {
+        console.log(currentValue);
+        console.log(stepTemp);
         adjust(tacho, step.temperatura);
     }
 
