@@ -81,6 +81,7 @@ var sendFakeData = function () {
 
 var getCurrentValue = function (tacho, jsonData) {
     var clave = tacho.replace("t", "m"); //t1-> m1 .. y todo asi
+    console.log(jsonData);
     return jsonData[clave];
 
 };
