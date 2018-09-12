@@ -103,7 +103,7 @@ var logIfYouMust = function (fermentador, jsonData) {
         var now = new Date().getTime();
         var toSave = {
             time: now,
-            temperatura: currentVal
+            temperatura: currentVal 
         };
         db.push("/running/"+fermentador+"/log[]", toSave);
     }
