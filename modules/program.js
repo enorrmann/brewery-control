@@ -99,7 +99,6 @@ var logIfYouMust = function (fermentador, jsonData) {
     var currentVal = getCurrentValue(fermentador, jsonData);
     if (lastSavedData[fermentador] !== currentVal) {
         lastSavedData[fermentador] = currentVal;
-        // save
         var now = new Date().getTime();
         var toSave = {
             time: now,
