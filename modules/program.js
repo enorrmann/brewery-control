@@ -5,6 +5,7 @@ var myEvents = require('./myEvents.js');
 
 
 var assignedPrograms = {};
+var lastSavedData = {};
 
 var getProgramas = function () {
     return db.getData("/programas");
@@ -79,19 +80,33 @@ var sendFakeData = function () {
     monitor("0;23;24;25;26;23;24;25;26;0;0;0;0;");
 };
 
-var getCurrentValue = function (tacho, jsonData) {
+var getCurrentValue = function (fermentador, jsonData) {
+    return jsonData[fermentador];
+};
+
+var getCurrentLimit = function (tacho, jsonData) {
     var clave = tacho.replace("t", "m"); //t1-> m1 .. y todo asi
     return jsonData[clave];
-
 };
 
 var adjust = function (tacho, value) {
     myEvents.emit("adjust", {tacho: tacho, value: value});
 };
 
+var logIfYouMust = function (fermentador, jsonData) {
+    var currentVal = getCurrentValue(fermentador, jsonData);
+    if (lastSavedData[fermentador] !== currentVal) {
+        lastSavedData[fermentador] = currentVal;
+        // save
+        console.log("guardo "+currentVal+" en "+fermentador);
+
+    }
+
+};
+
 var adjustIfYouMust = function (tacho, jsonData) {
     var step = getCurrentStep(assignedPrograms[tacho]);
-    var currentValue = getCurrentValue(tacho, jsonData);
+    var currentValue = getCurrentLimit(tacho, jsonData);
     var stepTemp = step.temperatura + '.00';
     if (step != null && currentValue != stepTemp) {
         adjust(tacho, step.temperatura);
@@ -114,11 +129,11 @@ var tieneProgramaActivo = function (tacho) {
 };
 
 var getTachosConActivePrograms = function () {
-    var tachos = Object.keys(assignedPrograms);
+    var fermentadores = Object.keys(assignedPrograms);
     var activos = [];
-    tachos.forEach(function (tacho) {
-        if (tieneProgramaActivo(tacho)) {
-            activos.push(tacho);
+    fermentadores.forEach(function (fermentador) {
+        if (tieneProgramaActivo(fermentador)) {
+            activos.push(fermentador);
         }
     });
     return activos;
@@ -126,9 +141,10 @@ var getTachosConActivePrograms = function () {
 
 var monitor = function (sensorData) {
     var jsonData = adapter.asJson(sensorData);
-    var tachos = getTachosConActivePrograms();
-    tachos.forEach(function (tacho) {
-        adjustIfYouMust(tacho, jsonData);
+    var fermentadoresActivos = getTachosConActivePrograms();
+    fermentadoresActivos.forEach(function (fermentador) {
+        adjustIfYouMust(fermentador, jsonData);
+        logIfYouMust(fermentador, jsonData);
     });
 
 };

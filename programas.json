@@ -1,95 +1,35 @@
 {
     "programas": [
         {
-            "nombre": "Ottra Receta Tradicional",
-            "descripcion": "La primer receta y la mas usada",
+            "nombre": "Receta modelo",
             "pasos": [
                 {
-                    "paso": "Fermentacion principal",
-                    "duracion": 86400000,
-                    "temperatura": 15,
-                    "dias": "1"
+                    "paso": "Fermentacion principal 1",
+                    "dias": "1",
+                    "temperatura": "12"
                 },
                 {
-                    "paso": "Guarda Caliente",
-                    "duracion": 172800000,
-                    "temperatura": 18,
-                    "dias": "2"
+                    "paso": "Fermentacion principal 2",
+                    "dias": "3",
+                    "temperatura": "18"
                 },
                 {
-                    "paso": "Enfriamiento",
-                    "duracion": 172800000,
-                    "temperatura": 23,
-                    "dias": "3"
-                }
-            ]
-        },
-        {
-            "nombre": "Ottra Pale Ale",
-            "descripcion": "La primer receta y la mas usada pero mas larga",
-            "pasos": [
-                {
-                    "paso": "primer paso",
-                    "duracion": 6600000,
-                    "temperatura": 15,
-                    "dias": "3"
+                    "paso": "Guarda caliente",
+                    "dias": "2",
+                    "temperatura": "25"
                 },
                 {
-                    "paso": "segundo paso",
-                    "duracion": 8600000,
-                    "temperatura": 18,
-                    "dias": "4"
+                    "paso": "Enfriamiento 1",
+                    "dias": "1",
+                    "temperatura": "15"
                 },
                 {
-                    "paso": "tercer paso",
-                    "duracion": 9600000,
-                    "temperatura": 23,
-                    "dias": "5"
-                }
-            ]
-        },
-        {
-            "nombre": "Cerveza verde",
-            "pasos": [
-                {
-                    "paso": "Primer paso",
-                    "duracion": "2",
-                    "temperatura": "24",
-                    "dias": "6"
+                    "paso": "Enfriamiento 2",
+                    "dias": "2",
+                    "temperatura": "5"
                 }
             ]
         }
     ],
-    "running": {
-        "t1": {
-            "nombre": "Ottra Receta Tradicional",
-            "descripcion": "La primer receta y la mas usada",
-            "pasos": [
-                {
-                    "paso": "Fermentacion principal",
-                    "duracion": 86400000,
-                    "temperatura": 15,
-                    "dias": "1",
-                    "startTime": 1536673931535,
-                    "endTime": 1536760331535
-                },
-                {
-                    "paso": "Guarda Caliente",
-                    "duracion": 172800000,
-                    "temperatura": 18,
-                    "dias": "2",
-                    "startTime": 1536760331536,
-                    "endTime": 1536933131536
-                },
-                {
-                    "paso": "Enfriamiento",
-                    "duracion": 259200000,
-                    "temperatura": 23,
-                    "dias": "3",
-                    "startTime": 1536933131537,
-                    "endTime": 1537192331537
-                }
-            ]
-        }
-    }
+    "running": {}
 }
