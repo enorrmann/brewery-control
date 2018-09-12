@@ -61,6 +61,7 @@ var schedule = function (programaBase, startTime) {
 var assign = function (data) {
     var now = new Date().getTime();
     var tacho = data.tacho;
+    delete lastSavedData[tacho];
     var programa = data.programa;
 
     var agendado = schedule(programa, now);
@@ -72,6 +73,7 @@ var save = function (programas) {
 };
 
 var remove = function (tacho) {
+    delete lastSavedData[tacho];
     delete assignedPrograms[tacho];
     db.push("/running", assignedPrograms);
 };
@@ -98,8 +100,12 @@ var logIfYouMust = function (fermentador, jsonData) {
     if (lastSavedData[fermentador] !== currentVal) {
         lastSavedData[fermentador] = currentVal;
         // save
-        console.log("guardo "+currentVal+" en "+fermentador);
-
+        var now = new Date().getTime();
+        var toSave = {
+            time: now,
+            temperatura: currentVal
+        };
+        db.push("/running/"+fermentador+"/log[]", toSave);
     }
 
 };
