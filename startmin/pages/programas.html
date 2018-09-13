@@ -119,30 +119,11 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="submit" ng-click="quitarPrograma(tacho)" class="btn btn-danger pull-right">Finalizar programa</button>
+                                    <button ng-click="quitarPrograma(tacho)" class="btn btn-danger pull-right">Finalizar programa</button>
+                                    <button ng-click="descargarRegistro(tacho)" class="btn btn-primary pull-right"><i class="fa fa-download"></i> Descargar registro</button>
                                 </div>
                                 <!-- /tabla pasos-->
-                                
-                                <!-- tabla log-->
-                                <div class="table-responsive" ng-if="assignedPrograms[tacho]">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Inicio</th>
-                                                <th>Temperatura</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="entry in assignedPrograms[tacho].log">
-                                                <td>{{$index + 1}}</td>
-                                                <td>{{entry.time| date  : 'dd/MM hh:mm:ss'}}</td>
-                                                <td>{{entry.temperatura}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /tabla pasos-->
+
 
 
                             </div>

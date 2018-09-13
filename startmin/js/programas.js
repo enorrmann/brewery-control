@@ -59,6 +59,11 @@ app.controller('programaCtrl', function ($scope, $resource) {
         return url.query().$promise;
     };
 
+    var getLog = function (fermentador) {
+        var url = '/registro/' + fermentador;
+        window.open(url, '_blank');
+    };
+
     var saveAll = function () {
         var url = $resource('programas');
         return url.save({}, $scope.programas).$promise;
@@ -81,6 +86,10 @@ app.controller('programaCtrl', function ($scope, $resource) {
         remove(tacho).then(function (data) {
             init();
         });
+    };
+
+    $scope.descargarRegistro = function (fermentador) {
+        getLog(fermentador);
     };
 
     $scope.seleccionar = function (programa) {

@@ -11,6 +11,7 @@ const logger = require('./modules/simpleDb.js');
 const db = require('./users');
 const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
+var json2xls = require('json2xls');
 
 myEvents.on("adjust", function (data) {
     var codTacho = data.tacho.replace('t', 'S');
@@ -26,6 +27,8 @@ var path = require('path');
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(json2xls.middleware);
+
 
 passport.use(new Strategy(
         function (username, password, cb) {
@@ -166,6 +169,11 @@ app.post('/assignedPrograms', function (req, res) {
 
 app.delete('/assignedPrograms/:tacho', function (req, res) {
     res.status(200).send(program.remove(req.params.tacho));
+});
+
+app.get('/registro/:fermentador', function (req, res) {
+    var fnum = req.params.fermentador;
+    res.xls('registro_' + fnum + '.xlsx', program.getLog(fnum));
 });
 
 var initPort = function (puerto) {

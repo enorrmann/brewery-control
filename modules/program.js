@@ -95,16 +95,20 @@ var adjust = function (tacho, value) {
     myEvents.emit("adjust", {tacho: tacho, value: value});
 };
 
+var getLog = function (fermentador) {
+    return db.getData("/running/" + fermentador + "/log");
+};
+
 var logIfYouMust = function (fermentador, jsonData) {
     var currentVal = getCurrentValue(fermentador, jsonData);
     if (lastSavedData[fermentador] !== currentVal) {
         lastSavedData[fermentador] = currentVal;
         var now = new Date().getTime();
         var toSave = {
-            time: now,
-            temperatura: currentVal 
+            fecha: getTimeString(now),
+            temperatura: currentVal
         };
-        db.push("/running/"+fermentador+"/log[]", toSave);
+        db.push("/running/" + fermentador + "/log[]", toSave);
     }
 
 };
@@ -154,6 +158,10 @@ var monitor = function (sensorData) {
 
 };
 
+var getTimeString = function (milis) {
+    var d = new Date(milis);
+    return lead(d.getDate()) + "-" + lead(d.getMonth() + 1) + "-" + d.getFullYear() + " " + lead(d.getHours()) + ":" + lead(d.getMinutes()) + ":" + lead(d.getSeconds());
+};
 
 module.exports = {
     monitor: monitor,
@@ -162,5 +170,6 @@ module.exports = {
     assign: assign,
     remove: remove,
     save: save,
-    tieneProgramaActivo: tieneProgramaActivo
+    tieneProgramaActivo: tieneProgramaActivo,
+    getLog: getLog
 };
