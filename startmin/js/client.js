@@ -34,10 +34,10 @@ socket.on('message', function (data) {
     $(".maxtacho2").html(dataArray[3]);
     $(".maxtacho3").html(dataArray[4]);
 
-    $(".tacho0").html(dataArray[5] + '&deg');
-    $(".tacho1").html(dataArray[6] + '&deg');
-    $(".tacho2").html(dataArray[7] + '&deg');
-    $(".tacho3").html(dataArray[8] + '&deg');
+    $(".tacho0").html(dataArray[5] + '&deg;C');
+    $(".tacho1").html(dataArray[6] + '&deg;C');
+    $(".tacho2").html(dataArray[7] + '&deg;C');
+    $(".tacho3").html(dataArray[8] + '&deg;C');
 
     var comp0 = dataArray[9];
     var comp1 = dataArray[10];
