@@ -157,6 +157,9 @@ var monitor = function (sensorData) {
     });
 
 };
+var lead = function (number) {
+    return (number < 10) ? "0" + number : number;
+};
 
 var getTimeString = function (milis) {
     var d = new Date(milis);
