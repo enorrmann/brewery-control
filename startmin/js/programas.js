@@ -13,6 +13,7 @@ app.controller('programaCtrl', function ($scope, $resource, $timeout) {
         var keys = Object.keys($scope.assignedPrograms);
         keys.forEach(function (key) {
             if ($scope.assignedPrograms[key].pasos) {
+                console.log('check times for '+key);
                 setStepState($scope.assignedPrograms[key]);
             }
         });
