@@ -13,7 +13,6 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         var keys = Object.keys($scope.assignedPrograms);
         keys.forEach(function (key) {
             if ($scope.assignedPrograms[key].pasos) {
-                console.log('check times for '+key);
                 setStepState($scope.assignedPrograms[key]);
             }
         });
@@ -134,7 +133,7 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
 
 
     $interval(
-            checkStepStates, 10000
+            checkStepStates, 60000 // chequear el estado cada un minuto
             );
 
 
