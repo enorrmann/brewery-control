@@ -2,7 +2,7 @@ var asJson = function (sensorData) {
     var dataArray = sensorData.split(" ").join("").split(";");
     
     var newData = {}
-    if (dataArray.length < 12){
+    if (dataArray.length != 14){
         newData =
             {
                 status: 2
