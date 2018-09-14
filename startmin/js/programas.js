@@ -1,6 +1,6 @@
 
 var app = angular.module('myApp', ['ngResource']);
-app.controller('programaCtrl', function ($scope, $resource, $timeout) {
+app.controller('programaCtrl', function ($scope, $resource, $interval) {
 
     $scope.seleccion = {};
     $scope.editandoReceta = false;
@@ -133,7 +133,7 @@ app.controller('programaCtrl', function ($scope, $resource, $timeout) {
     init();
 
 
-    $timeout(
+    $interval(
             checkStepStates, 10000
             );
 
