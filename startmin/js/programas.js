@@ -4,9 +4,30 @@ app.controller('programaCtrl', function ($scope, $resource) {
 
     $scope.seleccion = {};
     $scope.editandoReceta = false;
-
+    $scope.assignedPrograms = {};
     $scope.editStart = function () {
         $scope.editandoReceta = true;
+    };
+
+    var checkStepStates = function () {
+        var keys = Object.keys($scope.assignedPrograms);
+        keys.forEach(function (key) {
+            if ($scope.assignedPrograms[key].pasos) {
+                setStepState($scope.assignedPrograms[key]);
+            }
+        });
+    };
+
+    var setStepState = function (programa) {
+        var now = new Date().getTime();
+        var pasos = programa.pasos;
+        for (var i = 0; i < pasos.length; i++) {
+            if (pasos[i].endTime < now) {
+                pasos[i].state = 'success';
+            } else if (pasos[i].startTime <= now && pasos[i].endTime >= now) {
+                pasos[i].state = 'info';
+            }
+        }
     };
 
     $scope.guardar = function () {
@@ -105,9 +126,15 @@ app.controller('programaCtrl', function ($scope, $resource) {
         });
         getAssignedPrograms().then(function (assignedPrograms) {
             $scope.assignedPrograms = assignedPrograms;
+            checkStepStates();
         });
     };
     init();
+
+
+    setInterval(
+            checkStepStates, 10000
+            );
 
 
 

@@ -109,7 +109,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="paso in assignedPrograms[tacho].pasos">
+                                            <tr ng-repeat="paso in assignedPrograms[tacho].pasos" class="{{paso.state}}">
                                                 <td>{{$index + 1}}</td>
                                                 <td>{{paso.paso}}</td>
                                                 <td>{{paso.startTime| date  : 'dd/MM hh:mm'}}</td>
