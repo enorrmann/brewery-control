@@ -103,8 +103,8 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         });
     };
 
-    $scope.quitarPrograma = function (tacho) {
-        remove(tacho).then(function (data) {
+    $scope.quitarPrograma = function () {
+        remove($scope.fermentadorSeleccionado).then(function (data) {
             init();
         });
     };
@@ -113,6 +113,10 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         getLog(fermentador);
     };
 
+    $scope.seleccionarFermetador = function (fermentador) {
+        $scope.fermentadorSeleccionado = fermentador;
+        
+    };
     $scope.seleccionar = function (programa) {
         $scope.editandoReceta = false;
         $scope.seleccion.programa = programa;
