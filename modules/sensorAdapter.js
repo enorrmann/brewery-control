@@ -1,6 +1,14 @@
 var asJson = function (sensorData) {
     var dataArray = sensorData.split(" ").join("").split(";");
-    var newData =
+    
+    var newData = {}
+    if (dataArray.length < 12){
+        newData =
+            {
+                status: 2
+            }
+    } else {
+        newData =
             {
                 status: dataArray[0],
                 m1: dataArray[1],
@@ -12,6 +20,8 @@ var asJson = function (sensorData) {
                 t3: dataArray[7],
                 t4: dataArray[8]
             };
+
+    }
     return newData;
 };
 module.exports = {
