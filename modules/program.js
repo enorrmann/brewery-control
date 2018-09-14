@@ -107,11 +107,11 @@ var logIfYouMust = function (fermentador, jsonData) {
         lastSavedData[fermentador] = currentVal;
         var now = new Date().getTime();
         var toSave = {
-            status: jsonData.status,
             fecha: getTimeString(now),
-            temperatura: currentVal,
+            paso : step.paso,
+            status: jsonData.status,
             limite: currentLimit,
-            paso : step.paso
+            temperatura: currentVal
         };
         db.push("/running/" + fermentador + "/log[]", toSave);
     }
