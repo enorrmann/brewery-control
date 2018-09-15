@@ -112,8 +112,8 @@
                                             <tr ng-repeat="paso in assignedPrograms[tacho].pasos" ng-class="paso.state">
                                                 <td>{{$index + 1}}</td>
                                                 <td>{{paso.paso}}</td>
-                                                <td>{{paso.startTime| date  : 'dd/MM hh:mm'}}</td>
-                                                <td>{{paso.endTime| date  : 'dd/MM hh:mm'}}</td>
+                                                <td>{{paso.startTime| date  : 'dd/MM HH:mm'}}</td>
+                                                <td>{{paso.endTime| date  : 'dd/MM HH:mm'}}</td>
                                                 <td>{{paso.dias}}</td>
                                                 <td>{{paso.temperatura}}</td>
                                             </tr>
