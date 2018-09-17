@@ -125,6 +125,8 @@ var logIfYouMust = function (fermentador, jsonData) {
             console.log('no paso un minuto aun');
 
         }
+    } else {
+        console.log('mismo valor');
     }
 
 };
