@@ -4,11 +4,6 @@ var logDb = new JsonDB("log", true, true);
 const adapter = require('./sensorAdapter.js');
 var myEvents = require('./myEvents.js');
 
-
-
-db.delete("/running/t1/log");
-db.delete("/running/t2/log");
-
 var assignedPrograms = {};
 var lastSavedData = {};
 var lastSavedTime = {};
