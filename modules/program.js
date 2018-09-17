@@ -1,5 +1,6 @@
 var JsonDB = require('node-json-db');
 var db = new JsonDB("programas", true, true);
+var logDb = new JsonDB("log", true, true);
 const adapter = require('./sensorAdapter.js');
 var myEvents = require('./myEvents.js');
 
@@ -99,7 +100,7 @@ var adjust = function (tacho, value) {
 };
 
 var getLog = function (fermentador) {
-    return db.getData("/running/" + fermentador + "/log");
+    return logDb.getData("/running/" + fermentador + "/log");
 };
 
 var logIfYouMust = function (fermentador, jsonData) {
@@ -110,7 +111,6 @@ var logIfYouMust = function (fermentador, jsonData) {
 
     if (lastSavedData[fermentador] !== currentVal) {
         if (!lastSavedTime[fermentador] || (now - lastSavedTime[fermentador] > 60000)) { // si no hay valor de ultima grabacion.. o ya paso un minuto
-            console.log('paso un minuto !');
             lastSavedTime[fermentador] = now;
             lastSavedData[fermentador] = currentVal;
             var toSave = {
@@ -120,15 +120,10 @@ var logIfYouMust = function (fermentador, jsonData) {
                 limite: currentLimit,
                 temperatura: currentVal
             };
-            db.push("/running/" + fermentador + "/log[]", toSave);
+            logDb.push("/running/" + fermentador + "/log[]", toSave);
         } else {
-            console.log('no paso un minuto aun');
-
         }
-    } else {
-        console.log('mismo valor');
-    }
-
+    } 
 };
 
 var adjustIfYouMust = function (tacho, jsonData) {
