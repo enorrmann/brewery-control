@@ -79,6 +79,7 @@ var remove = function (tacho) {
     delete lastSavedTime[tacho];
     delete assignedPrograms[tacho];
     db.push("/running", assignedPrograms);
+    logDb.delete("/running/" + tacho + "/log");
 };
 
 var sendFakeData = function () {
