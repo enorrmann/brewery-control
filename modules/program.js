@@ -6,6 +6,7 @@ var myEvents = require('./myEvents.js');
 
 var assignedPrograms = {};
 var lastSavedData = {};
+var lastSavedTime = {};
 
 var getProgramas = function () {
     return db.getData("/programas");
@@ -62,6 +63,7 @@ var assign = function (data) {
     var now = new Date().getTime();
     var tacho = data.tacho;
     delete lastSavedData[tacho];
+    delete lastSavedTime[tacho];
     var programa = data.programa;
 
     var agendado = schedule(programa, now);
@@ -74,6 +76,7 @@ var save = function (programas) {
 
 var remove = function (tacho) {
     delete lastSavedData[tacho];
+    delete lastSavedTime[tacho];
     delete assignedPrograms[tacho];
     db.push("/running", assignedPrograms);
 };
@@ -100,20 +103,28 @@ var getLog = function (fermentador) {
 };
 
 var logIfYouMust = function (fermentador, jsonData) {
+    var now = new Date().getTime();
     var step = getCurrentStep(assignedPrograms[fermentador]);
     var currentVal = getCurrentValue(fermentador, jsonData);
     var currentLimit = getCurrentLimit(fermentador, jsonData);
+
     if (lastSavedData[fermentador] !== currentVal) {
-        lastSavedData[fermentador] = currentVal;
-        var now = new Date().getTime();
-        var toSave = {
-            fecha: getTimeString(now),
-            paso : step.paso,
-            status: jsonData.status,
-            limite: currentLimit,
-            temperatura: currentVal
-        };
-        db.push("/running/" + fermentador + "/log[]", toSave);
+        if (!lastSavedTime[fermentador] || (now - lastSavedTime[fermentador] > 60000)) { // si no hay valor de ultima grabacion.. o ya paso un minuto
+            console.log('paso un minuto !');
+            lastSavedTime[fermentador] = now;
+            lastSavedData[fermentador] = currentVal;
+            var toSave = {
+                fecha: getTimeString(now),
+                paso: step.paso,
+                status: jsonData.status,
+                limite: currentLimit,
+                temperatura: currentVal
+            };
+            db.push("/running/" + fermentador + "/log[]", toSave);
+        } else {
+            console.log('no paso un minuto aun');
+
+        }
     }
 
 };
