@@ -110,7 +110,7 @@ var logIfYouMust = function (fermentador, jsonData) {
     var currentLimit = getCurrentLimit(fermentador, jsonData);
 
     if (lastSavedData[fermentador] !== currentVal) {
-        if (!lastSavedTime[fermentador] || (now - lastSavedTime[fermentador] > 60000)) { // si no hay valor de ultima grabacion.. o ya paso un minuto
+        if (!lastSavedTime[fermentador] || (now - lastSavedTime[fermentador] > 600000)) { // si no hay valor de ultima grabacion.. o ya paso diex minutox
             lastSavedTime[fermentador] = now;
             lastSavedData[fermentador] = currentVal;
             var toSave = {
