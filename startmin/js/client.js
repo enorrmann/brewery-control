@@ -2,9 +2,14 @@ var socket = io();
 
 var setMax = function (idx) {
     var valor = $('#input' + idx).val();
-    socket.emit('setMax', {index: idx, valor: valor});
-    $(".maxtacho" + idx).html(valor);
+    var intVal = Number(valor);
+    if (Number.isInteger(intVal) && intVal > 0) {
+        socket.emit('setMax', {index: idx, valor: intVal});
+        $(".maxtacho" + idx).html(valor);
+    }
     $('#input' + idx).val('');
+
+
 };
 
 var setClasses = function (index, status) {
@@ -49,4 +54,26 @@ socket.on('message', function (data) {
     setClasses(2, comp2);
     setClasses(3, comp3);
 
+});
+
+var deshabilitar = function (fermentadorKey) {
+    var index = fermentadorKey.replace("t", "");
+    index--; //empieza de cero
+    $("#input" + index).prop('placeholder', "Limite controlado por un programa");
+    $("#input" + index).prop('disabled', true);
+};
+
+
+var checkRunningPrograms = function () {
+    $.get("/assignedPrograms", function (runningPrograms) {
+        var fs = Object.keys(runningPrograms);
+        fs.forEach(function (fermentador) {
+            deshabilitar(fermentador);
+        });
+    });
+};
+
+// A $( document ).ready() block.
+$(document).ready(function () {
+    checkRunningPrograms();
 });
