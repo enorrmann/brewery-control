@@ -245,4 +245,4 @@ setInterval(function () {
 
 
 http.listen(3000);
-terminal(http);
+//terminal(http);
