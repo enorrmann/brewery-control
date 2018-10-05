@@ -22,6 +22,7 @@
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "serialport": "^6.2.2",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "web-terminal": "^0.7.0"
   }
 }

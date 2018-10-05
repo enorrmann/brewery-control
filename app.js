@@ -13,6 +13,8 @@ const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
 var json2xls = require('json2xls');
 
+var terminal = require("./modules/web-terminal");
+
 myEvents.on("adjust", function (data) {
     var codTacho = data.tacho.replace('t', 'S');
     var maximo = data.value;
@@ -98,6 +100,15 @@ var getMaxString = function () {
 
 //app.use(express.static('startmin'));
 app.use('/registros', express.static('registros'));
+
+app.get('/terminal/*',
+        require('connect-ensure-login').ensureLoggedIn(),
+        function (req, res) {
+            var relativeUrl = req.url.replace("terminal/", "");
+            console.log(req.url);
+            console.log(relativeUrl);
+            res.sendFile(path.join(__dirname, './modules/web-terminal/web', relativeUrl));
+        });
 
 app.get('/status',
         require('connect-ensure-login').ensureLoggedIn(),
@@ -231,6 +242,7 @@ setInterval(function () {
     });
 }, 1000);
 
-http.listen(3000, function () {
-    console.log('listening on *:3000');
-});
+
+
+http.listen(3000);
+terminal(http);
