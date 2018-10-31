@@ -1,7 +1,7 @@
 var JsonDB = require('node-json-db');
-var dataFolder = process.env.HOME+"/.config/brewery-control/";
-var db = new JsonDB(dataFolder+"programas", true, true);
-var logDb = new JsonDB(dataFolder+"log", true, true);
+var dataFolder = process.env.HOME + "/.config/brewery-control/";
+var db = new JsonDB(dataFolder + "programas", true, true);
+var logDb = new JsonDB(dataFolder + "log", true, true);
 const adapter = require('./sensorAdapter.js');
 var myEvents = require('./myEvents.js');
 
@@ -75,16 +75,21 @@ var save = function (programas) {
     db.push("/programas", programas);
 };
 
+var addPaso = function (tacho, paso) {
+    var ultimopaso = db.getData("/running/" + tacho + "/pasos[-1]");
+    paso.startTime = ultimopaso.endTime + 1;// +1 de changui
+    paso.endTime = paso.startTime + paso.duracion;
+    paso.state = ultimopaso.state;
+
+    db.push("/running/" + tacho + "/pasos[]", paso);
+};
+
 var remove = function (tacho) {
     delete lastSavedData[tacho];
     delete lastSavedTime[tacho];
     delete assignedPrograms[tacho];
     db.push("/running", assignedPrograms);
     logDb.delete("/running/" + tacho + "/log");
-};
-
-var sendFakeData = function () {
-    monitor("0;23;24;25;26;23;24;25;26;0;0;0;0;");
 };
 
 var getCurrentValue = function (fermentador, jsonData) {
@@ -124,7 +129,7 @@ var logIfYouMust = function (fermentador, jsonData) {
             logDb.push("/running/" + fermentador + "/log[]", toSave);
         } else {
         }
-    } 
+    }
 };
 
 var adjustIfYouMust = function (tacho, jsonData) {
@@ -185,6 +190,7 @@ module.exports = {
     getProgramas: getProgramas,
     getAssignedPrograms: getAssignedPrograms,
     assign: assign,
+    addPaso: addPaso,
     remove: remove,
     save: save,
     tieneProgramaActivo: tieneProgramaActivo,

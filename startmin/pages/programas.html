@@ -103,6 +103,7 @@
                                                 <th>Fin</th>
                                                 <th>Dias</th>
                                                 <th>Temperatura</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -113,6 +114,7 @@
                                                 <td>{{paso.endTime| date  : 'dd/MM HH:mm'}}</td>
                                                 <td>{{paso.dias}}</td>
                                                 <td>{{paso.temperatura}}</td>
+                                                <td><button type="button" ng-click="repetir(paso,tacho)" class="btn btn-primary btn-circle"><i class="fa fa-plus-circle"></i></button></td>
                                             </tr>
                                         </tbody>
                                     </table>

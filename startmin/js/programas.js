@@ -9,6 +9,11 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         $scope.editandoReceta = true;
     };
 
+    var addPaso = function (tacho, paso) {
+        var url = $resource('assignedPrograms/:id/paso');
+        return url.save({id: tacho}, paso).$promise;
+    };
+    
     var checkStepStates = function () {
         var keys = Object.keys($scope.assignedPrograms);
         keys.forEach(function (key) {
@@ -33,6 +38,12 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
     $scope.guardar = function () {
         $scope.editandoReceta = false;
         saveAll();
+    };
+
+    $scope.repetir = function (paso, tacho) {
+        addPaso(tacho, paso).then(function (data) {
+            init();
+        });
     };
 
     $scope.eliminarPaso = function (idx) {
@@ -115,7 +126,7 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
 
     $scope.seleccionarFermetador = function (fermentador) {
         $scope.fermentadorSeleccionado = fermentador;
-        
+
     };
     $scope.seleccionar = function (programa) {
         $scope.editandoReceta = false;

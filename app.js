@@ -7,8 +7,8 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
-var propertiesFile = process.env.HOME+"/.config/brewery-control/defaults.prop";
-const db = require('./users'); 
+var propertiesFile = process.env.HOME + "/.config/brewery-control/defaults.prop";
+const db = require('./users');
 const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
 var json2xls = require('json2xls');
@@ -141,6 +141,10 @@ app.post('/assignedPrograms', function (req, res) {
 
 app.delete('/assignedPrograms/:tacho', function (req, res) {
     res.status(200).send(program.remove(req.params.tacho));
+});
+
+app.post('/assignedPrograms/:tacho/paso', function (req, res) {
+    res.status(200).send(program.addPaso(req.params.tacho, req.body));
 });
 
 app.get('/registro/:fermentador', function (req, res) {
