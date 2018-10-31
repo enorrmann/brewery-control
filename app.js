@@ -7,6 +7,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
+var propertiesFile = process.env.HOME+"/.config/brewery-control/defaults.prop";
 const db = require('./users');
 const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
@@ -73,7 +74,7 @@ let port = null;
 var connected = false;
 
 // load default props on start
-var defaults = fs.readFileSync('defaults.prop', 'utf8');
+var defaults = fs.readFileSync(propertiesFile, 'utf8');
 var maxArray = defaults.split(";");
 
 var sendDefaults = function () {
@@ -124,9 +125,6 @@ app.post('/login',
         });
 
 
-app.get('/registros/*.csv', function (req, res) {
-    res.sendFile(req.url);
-});
 app.get('/programas', function (req, res) {
     res.status(200).send(program.getProgramas());
 });
@@ -183,7 +181,7 @@ io.on('connection', function (socket) {
             port.write('S' + codeindex + 'X0' + data.valor + 'E');
         }
         maxArray[data.index] = data.valor;
-        fs.writeFile('defaults.prop', getMaxString(), (err) => {
+        fs.writeFile(propertiesFile, getMaxString(), (err) => {
             if (err)
                 throw err;
         });
