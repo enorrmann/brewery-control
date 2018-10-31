@@ -7,13 +7,10 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
-const logger = require('./modules/simpleDb.js');
 const db = require('./users');
 const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
 var json2xls = require('json2xls');
-
-var terminal = require("./modules/web-terminal");
 
 myEvents.on("adjust", function (data) {
     var codTacho = data.tacho.replace('t', 'S');
@@ -98,35 +95,6 @@ var getMaxString = function () {
     return maxArray[0] + ';' + maxArray[1] + ';' + maxArray[2] + ';' + maxArray[3] + ';';
 };
 
-//app.use(express.static('startmin'));
-app.use('/registros', express.static('registros'));
-
-app.get('/terminal/*',
-        require('connect-ensure-login').ensureLoggedIn(),
-        function (req, res) {
-            var relativeUrl = req.url.replace("terminal/", "");
-            console.log(req.url);
-            console.log(relativeUrl);
-            res.sendFile(path.join(__dirname, './modules/web-terminal/web', relativeUrl));
-        });
-
-app.get('/status',
-        require('connect-ensure-login').ensureLoggedIn(),
-        function (req, res) {
-            res.status(200).send(logger.getStatus());
-        });
-
-
-app.post('/startRecording', function (req, res) {
-    logger.startRecording();
-    res.status(200).send();
-});
-
-app.post('/stopRecording', function (req, res) {
-    logger.stopRecording();
-    res.status(200).send();
-});
-
 app.get('/login', function (req, res) {
     res.sendFile(path.join(__dirname, './startmin/pages', 'login.html'));
 });
@@ -158,11 +126,6 @@ app.post('/login',
 
 app.get('/registros/*.csv', function (req, res) {
     res.sendFile(req.url);
-});
-app.get('/entries', function (req, res) {
-    logger.listEntries(function (error, items) {
-        res.status(200).send(items);
-    });
 });
 app.get('/programas', function (req, res) {
     res.status(200).send(program.getProgramas());
@@ -243,6 +206,4 @@ setInterval(function () {
 }, 1000);
 
 
-
 http.listen(3000);
-terminal(http);

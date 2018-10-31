@@ -1,6 +1,7 @@
 var JsonDB = require('node-json-db');
-var db = new JsonDB("programas", true, true);
-var logDb = new JsonDB("log", true, true);
+var dataFolder = process.env.HOME+"/.config/brewery-control/";
+var db = new JsonDB(dataFolder+"programas", true, true);
+var logDb = new JsonDB(dataFolder+"log", true, true);
 const adapter = require('./sensorAdapter.js');
 var myEvents = require('./myEvents.js');
 
