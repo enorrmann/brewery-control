@@ -106,6 +106,9 @@ app.get('/*.js', function (req, res) {
 app.get('/*.css', function (req, res) {
     res.sendFile(path.join(__dirname, './startmin', req.url));
 });
+app.get('/*.woff*', function (req, res) {
+    res.sendFile(path.join(__dirname, './startmin', req.url));
+});
 app.get('/*.html',
         require('connect-ensure-login').ensureLoggedIn(),
         function (req, res) {
