@@ -168,7 +168,6 @@ var initPort = function (puerto) {
         if (data[0] == 1) { // si se detecta un reinicio 
             sendDefaults(); // envio comandos de valores default
         }
-        logger.save(data);
         program.monitor(data);
         io.emit('message', data);
     });
