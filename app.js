@@ -151,6 +151,11 @@ app.post('/assignedPrograms/:tacho/paso', function (req, res) {
     res.status(200).send(program.addPaso(req.params.tacho, paso));
 });
 
+app.post('/assignedPrograms/:tacho/paso/:idPaso', function (req, res) {
+    var paso = req.body;
+    res.status(200).send(program.updatePaso(req.params.tacho, paso));
+});
+
 app.get('/registro/:fermentador', function (req, res) {
     var fnum = req.params.fermentador;
     res.xls('registro_' + fnum + '.xlsx', program.getLog(fnum));

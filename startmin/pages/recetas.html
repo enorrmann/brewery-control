@@ -138,8 +138,8 @@
                                             <tr ng-repeat="paso in seleccion.programa.pasos"> 
                                                 <td>{{$index + 1}}</td>
                                                 <td ng-if="!editandoReceta">{{paso.paso}}</td><td ng-if="editandoReceta"><input ng-model="paso.paso" class="form-control" placeholder="Nombre del paso"></td>
-                                                <td ng-if="!editandoReceta">{{paso.dias}}</td><td ng-if="editandoReceta"><input ng-model="paso.dias" class="form-control" placeholder="Duracion en dias"></td>
-                                                <td ng-if="!editandoReceta">{{paso.temperatura}}</td><td ng-if="editandoReceta"><input ng-model="paso.temperatura" class="form-control" placeholder="Temperatura"></td>
+                                                <td ng-if="!editandoReceta">{{paso.dias}}</td><td ng-if="editandoReceta"><input type="number" ng-model="paso.dias" class="form-control" placeholder="Duracion en dias"></td>
+                                                <td ng-if="!editandoReceta">{{paso.temperatura}}</td><td ng-if="editandoReceta"><input type="number" ng-model="paso.temperatura" class="form-control" placeholder="Temperatura"></td>
                                                 <td ng-if="editandoReceta"><button type="button" ng-click="eliminarPaso($index)" class="btn btn-warning btn-circle"><i class="fa fa-minus"></i></button></td>
                                             </tr>
                                             <tr ng-if="editandoReceta">

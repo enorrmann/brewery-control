@@ -112,7 +112,7 @@
                                                 <td>{{paso.paso}}</td>
                                                 <td>{{paso.startTime| date  : 'dd/MM HH:mm'}}</td>
                                                 <td>{{paso.endTime| date  : 'dd/MM HH:mm'}}</td>
-                                                <td>{{paso.dias}}</td>
+                                                <td><input type="number" spinner ng-model="paso.dias" ng-change="update(tacho, paso, $index)"/></td>
                                                 <td>{{paso.temperatura}}</td>
                                                 <td><button title="Repetir paso" type="button" ng-click="repetir(paso,tacho,$index)" class="btn btn-primary btn-circle"><i class="fa fa-refresh"></i></button></td>
                                             </tr>

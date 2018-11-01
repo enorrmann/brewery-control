@@ -15,6 +15,12 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         return url.save({id: tacho}, paso).$promise;
     };
 
+    var updatePaso = function (tacho, paso, idPaso) {
+        var url = $resource('assignedPrograms/:tacho/paso/:idPaso');
+        paso.idPaso = idPaso;
+        return url.save({tacho: tacho, idPaso: idPaso}, paso).$promise;
+    };
+
     var checkStepStates = function () {
         var keys = Object.keys($scope.assignedPrograms);
         keys.forEach(function (key) {
@@ -41,6 +47,11 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         saveAll();
     };
 
+    $scope.update = function (tacho, paso, idPaso) {
+        updatePaso(tacho, paso, idPaso).then(function (data) {
+            init();
+        });
+    };
     $scope.repetir = function (paso, tacho, idx) {
         addPaso(tacho, paso, idx).then(function (data) {
             init();
@@ -53,12 +64,8 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
 
     $scope.eliminarPrograma = function (idx) {
         $scope.programas.splice(idx, 1);
-        $scope.seleccion.programa = programas[0];
+        $scope.seleccion.programa = $scope.programas[0];
         saveAll();
-    };
-
-    $scope.agregarPaso = function () {
-        $scope.seleccion.programa.pasos.push({});
     };
 
     $scope.nuevoPrograma = function () {

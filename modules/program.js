@@ -100,6 +100,14 @@ var addPaso = function (tacho, paso) {
     db.push("/running/" + tacho + "/pasos", pasos);
 };
 
+var updatePaso = function (tacho, paso) {
+    var idPaso = paso.idPaso;
+    db.push("/running/" + tacho + "/pasos["+idPaso+"]", paso);
+    var pasos = db.getData("/running/" + tacho + "/pasos");
+    schedulePasos(pasos);
+    db.push("/running/" + tacho + "/pasos", pasos);
+};
+
 var remove = function (tacho) {
     delete lastSavedData[tacho];
     delete lastSavedTime[tacho];
@@ -210,5 +218,6 @@ module.exports = {
     remove: remove,
     save: save,
     tieneProgramaActivo: tieneProgramaActivo,
-    getLog: getLog
+    getLog: getLog,
+    updatePaso: updatePaso
 };
