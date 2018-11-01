@@ -147,7 +147,8 @@ app.delete('/assignedPrograms/:tacho', function (req, res) {
 });
 
 app.post('/assignedPrograms/:tacho/paso', function (req, res) {
-    res.status(200).send(program.addPaso(req.params.tacho, req.body));
+    var paso = req.body;
+    res.status(200).send(program.addPaso(req.params.tacho, paso));
 });
 
 app.get('/registro/:fermentador', function (req, res) {

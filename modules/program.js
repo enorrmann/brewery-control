@@ -42,6 +42,23 @@ var getCurrentStep = function (programa) {
 
 };
 
+var schedulePasos = function (pasos) {
+    var startTime = pasos[0].startTime;
+    for (var i = 0; i < pasos.length; i++) {
+        pasos[i].duracion = pasos[i].dias * 86400000; // duracion de un dia en milisegundos
+    }
+    for (var i = 0; i < pasos.length; i++) {
+        pasos[i].state = '';
+        if (i === 0) {
+            pasos[i].startTime = startTime;
+            pasos[i].endTime = pasos[i].duracion + startTime;
+        } else {
+            pasos[i].startTime = pasos[i - 1].endTime + 1;// +1 de changui
+            pasos[i].endTime = pasos[i].startTime + pasos[i].duracion;
+        }
+    }
+};
+
 var schedule = function (programaBase, startTime) {
     var programa = JSON.parse(JSON.stringify(programaBase)); // copia del array, sin referencias
     var pasos = programa.pasos;
@@ -76,12 +93,11 @@ var save = function (programas) {
 };
 
 var addPaso = function (tacho, paso) {
-    var ultimopaso = db.getData("/running/" + tacho + "/pasos[-1]");
-    paso.startTime = ultimopaso.endTime + 1;// +1 de changui
-    paso.endTime = paso.startTime + paso.duracion;
-    paso.state = ultimopaso.state;
-
-    db.push("/running/" + tacho + "/pasos[]", paso);
+    var pasos = db.getData("/running/" + tacho + "/pasos");
+    var idx = paso.idx;
+    pasos.splice(idx, 0, paso);
+    schedulePasos(pasos);
+    db.push("/running/" + tacho + "/pasos", pasos);
 };
 
 var remove = function (tacho) {
