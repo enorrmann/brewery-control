@@ -47,7 +47,18 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         saveAll();
     };
 
-    $scope.update = function (tacho, paso, idPaso) {
+    $scope.addUnDia = function (paso, tacho, idPaso) {
+        paso.dias++;
+        updatePaso(tacho, paso, idPaso).then(function (data) {
+            init();
+        });
+    };
+
+    $scope.removeUnDia = function (paso, tacho, idPaso) {
+        if (paso.dias == 1) {
+            return;
+        }
+        paso.dias--;
         updatePaso(tacho, paso, idPaso).then(function (data) {
             init();
         });

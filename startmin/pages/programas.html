@@ -112,9 +112,13 @@
                                                 <td>{{paso.paso}}</td>
                                                 <td>{{paso.startTime| date  : 'dd/MM HH:mm'}}</td>
                                                 <td>{{paso.endTime| date  : 'dd/MM HH:mm'}}</td>
-                                                <td><input type="number" spinner ng-model="paso.dias" ng-change="update(tacho, paso, $index)"/></td>
+                                                <!---<td><input type="number" spinner ng-model="paso.dias" ng-change="update(tacho, paso, $index)"/></td>-->
+                                                <td>{{paso.dias}}</td>
                                                 <td>{{paso.temperatura}}</td>
-                                                <td><button title="Repetir paso" type="button" ng-click="repetir(paso,tacho,$index)" class="btn btn-primary btn-circle"><i class="fa fa-refresh"></i></button></td>
+                                                <td>
+                                                    <button type="button" ng-click="addUnDia(paso,tacho,$index)" class="btn btn-success btn-circle"><i class="fa fa-plus"></i></button>
+                                                    <button type="button" ng-click="removeUnDia(paso,tacho,$index)" class="btn btn-warning btn-circle"><i class="fa fa-minus"></i></button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

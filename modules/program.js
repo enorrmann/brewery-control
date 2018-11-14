@@ -102,7 +102,7 @@ var addPaso = function (tacho, paso) {
 
 var updatePaso = function (tacho, paso) {
     var idPaso = paso.idPaso;
-    db.push("/running/" + tacho + "/pasos["+idPaso+"]", paso);
+    db.push("/running/" + tacho + "/pasos[" + idPaso + "]", paso);
     var pasos = db.getData("/running/" + tacho + "/pasos");
     schedulePasos(pasos);
     db.push("/running/" + tacho + "/pasos", pasos);
@@ -148,7 +148,8 @@ var logIfYouMust = function (fermentador, jsonData) {
                 paso: step.paso,
                 status: jsonData.status,
                 limite: currentLimit,
-                temperatura: currentVal
+                temperatura: currentVal,
+                compresor: jsonData.compresor
             };
             logDb.push("/running/" + fermentador + "/log[]", toSave);
         } else {

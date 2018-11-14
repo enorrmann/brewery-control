@@ -18,7 +18,8 @@ var asJson = function (sensorData) {
                 t1: dataArray[5],
                 t2: dataArray[6],
                 t3: dataArray[7],
-                t4: dataArray[8]
+                t4: dataArray[8],
+                compresor: dataArray[9]
             };
 
     }
