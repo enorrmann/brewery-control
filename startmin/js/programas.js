@@ -15,6 +15,11 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         return url.save({id: tacho}, paso).$promise;
     };
 
+    var powerDown = function () {
+        var url = $resource('system/powerdown');
+        return url.save().$promise;
+    };
+
     var updatePaso = function (tacho, paso, idPaso) {
         var url = $resource('assignedPrograms/:tacho/paso/:idPaso');
         paso.idPaso = idPaso;
@@ -84,6 +89,9 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
             nombre: 'Nuevo programa',
             pasos: [{}]
         };
+        if (!$scope.programas){
+            $scope.programas = [];
+        };
         $scope.programas.push(nuevoPrograma);
         $scope.seleccion.programa = nuevoPrograma;
 
@@ -121,6 +129,11 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
     };
 
     $scope.tachos = ['t1', 't2', 't3', 't4'];
+
+
+    $scope.apagarSistema = function () {
+        powerDown();
+    };
 
     $scope.iniciarPrograma = function (tacho) {
         var data = {

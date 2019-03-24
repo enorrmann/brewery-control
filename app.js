@@ -121,6 +121,13 @@ app.get('/',
             res.sendFile(path.join(__dirname, './startmin/pages', 'index.html'));
         });
 
+app.post('/system/powerdown',
+        require('connect-ensure-login').ensureLoggedIn(),
+        function (req, res) {
+            res.status(200).send();
+            console.log("powerdown");
+        });
+
 app.post('/login',
         passport.authenticate('local', {failureRedirect: '/login'}),
         function (req, res) {
