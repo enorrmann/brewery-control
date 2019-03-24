@@ -127,7 +127,8 @@ app.post('/system/powerdown',
         require('connect-ensure-login').ensureLoggedIn(),
         function (req, res) {
             res.status(200).send();
-            shell.exec('sudo /sbin/shutdown -h now');
+            //shell.exec('sudo /sbin/shutdown -h now');
+            shell.exec('sudo /sbin/reboot');
         });
 
 app.post('/login',
