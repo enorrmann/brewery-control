@@ -13,6 +13,8 @@ const program = require('./modules/program.js');
 var myEvents = require('./modules/myEvents.js');
 var json2xls = require('json2xls');
 
+const shell = require('shelljs');
+
 myEvents.on("adjust", function (data) {
     var codTacho = data.tacho.replace('t', 'S');
     var maximo = data.value;
@@ -125,7 +127,7 @@ app.post('/system/powerdown',
         require('connect-ensure-login').ensureLoggedIn(),
         function (req, res) {
             res.status(200).send();
-            console.log("powerdown");
+            shell.exec('sudo /sbin/shutdown -h now');
         });
 
 app.post('/login',
