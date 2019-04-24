@@ -128,7 +128,7 @@ app.post('/system/powerdown',
         function (req, res) {
             res.status(200).send();
             //shell.exec('sudo /sbin/shutdown -h now');
-            shell.exec('sudo /sbin/shutdown -h now');
+            shell.exec('sudo /sbin/halt');
         });
 
 app.post('/login',
