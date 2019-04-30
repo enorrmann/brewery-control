@@ -164,7 +164,10 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         $scope.editandoReceta = false;
         $scope.seleccion.programa = programa;
     };
-
+  
+  $scope.agregarPaso = function () {
+        $scope.seleccion.programa.pasos.push({});
+    };
 
     var init = function () {
         getAllPrograms().then(function (programas) {
