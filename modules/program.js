@@ -171,6 +171,10 @@ var ultimoPasoTime = function (programa) {
     return programa.pasos[programa.pasos.length - 1].endTime;
 };
 
+var getLastStep = function (programa) {
+    return programa.pasos[programa.pasos.length - 1];
+};
+
 var tieneProgramaActivo = function (tacho) {
     var programa = assignedPrograms[tacho];
     if (programa) {
@@ -219,6 +223,11 @@ var monitor = function (sensorData) {
     var fermentadoresFinalizados = getTachosConProgramasFinalizados();
     console.log(fermentadoresActivos);
     console.log(fermentadoresFinalizados);
+    fermentadoresFinalizados.forEach(function (fermentador) {
+        var step = getLastStep(assignedPrograms[fermentador]);
+        console.log(step);
+
+    });
     fermentadoresActivos.forEach(function (fermentador) {
         adjustIfYouMust(fermentador, jsonData);
         logIfYouMust(fermentador, jsonData);
