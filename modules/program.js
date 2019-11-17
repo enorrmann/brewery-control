@@ -181,6 +181,15 @@ var tieneProgramaActivo = function (tacho) {
     }
 };
 
+var tieneProgramaFinalizado = function (tacho) {
+    var programa = assignedPrograms[tacho];
+    if (programa) {
+        return ultimoPasoTime(programa) < now;
+    } else {
+        return false;
+    }
+};
+
 var getTachosConActivePrograms = function () {
     var fermentadores = Object.keys(assignedPrograms);
     var activos = [];
@@ -192,9 +201,23 @@ var getTachosConActivePrograms = function () {
     return activos;
 };
 
+var getTachosConProgramasFinalizados = function () {
+    var fermentadores = Object.keys(assignedPrograms);
+    var finalizados = [];
+    fermentadores.forEach(function (fermentador) {
+        if (tieneProgramaFinalizado(fermentador)) {
+            finalizados.push(fermentador);
+        }
+    });
+    return finalizados;
+};
+
 var monitor = function (sensorData) {
     var jsonData = adapter.asJson(sensorData);
     var fermentadoresActivos = getTachosConActivePrograms();
+    var fermentadoresFinalizados = getTachosConProgramasFinalizados();
+    console.log(fermentadoresActivos);
+    console.log(fermentadoresFinalizados);
     fermentadoresActivos.forEach(function (fermentador) {
         adjustIfYouMust(fermentador, jsonData);
         logIfYouMust(fermentador, jsonData);
