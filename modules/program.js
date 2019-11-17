@@ -221,11 +221,12 @@ var monitor = function (sensorData) {
     var jsonData = adapter.asJson(sensorData);
     var fermentadoresActivos = getTachosConActivePrograms();
     var fermentadoresFinalizados = getTachosConProgramasFinalizados();
-    console.log(fermentadoresActivos);
-    console.log(fermentadoresFinalizados);
     fermentadoresFinalizados.forEach(function (fermentador) {
         var step = getLastStep(assignedPrograms[fermentador]);
-        console.log(step);
+        if (step != null) {
+            var stepTemp = step.temperatura + '.00';
+            adjust(tacho, step.temperatura);
+        }
 
     });
     fermentadoresActivos.forEach(function (fermentador) {
