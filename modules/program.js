@@ -224,8 +224,7 @@ var monitor = function (sensorData) {
     fermentadoresFinalizados.forEach(function (fermentador) {
         var step = getLastStep(assignedPrograms[fermentador]);
         if (step != null) {
-            var stepTemp = step.temperatura + '.00';
-            adjust(tacho, step.temperatura);
+            adjust(fermentador, step.temperatura);
         }
 
     });
