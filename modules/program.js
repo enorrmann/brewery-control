@@ -184,6 +184,7 @@ var tieneProgramaActivo = function (tacho) {
 var tieneProgramaFinalizado = function (tacho) {
     var programa = assignedPrograms[tacho];
     if (programa) {
+        var now = new Date().getTime();
         return ultimoPasoTime(programa) < now;
     } else {
         return false;
