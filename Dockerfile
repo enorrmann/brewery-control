@@ -1,9 +1,8 @@
-FROM ubuntu:18.04
-RUN apt-get update
-RUN apt-get -y dist-upgrade
-RUN apt-get install -y npm nodejs git
+FROM node:8.10.0-alpine
+RUN apk update
+RUN apk add git python build-base linux-headers
 RUN cd && git clone https://github.com/enorrmann/brewery-control && cd brewery-control && npm install
-RUN mkdir /root/.config
+RUN apk del build-base linux-headers
 RUN mkdir /root/.config/brewery-control
 RUN touch /root/.config/brewery-control/defaults.prop
 WORKDIR /root/brewery-control
