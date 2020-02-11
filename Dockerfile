@@ -1,6 +1,6 @@
 FROM node:10.19.0-buster
 RUN apt-get update
-RUN apt-get install git python build-essential linux-headers-rpi
+RUN apt-get install git python build-essential raspberrypi-kernel-headers
 WORKDIR /root
 RUN git clone https://github.com/enorrmann/brewery-control
 WORKDIR /root/brewery-control
