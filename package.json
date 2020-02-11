@@ -17,7 +17,7 @@
     "express": "^4.13.3",
     "express-session": "^1.11.3",
     "json2xls": "^0.1.2",
-    "morgan": "^1.6.1",
+    "morgan": "^1.9.1",
     "node-json-db": "^0.7.5",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
