@@ -1,6 +1,6 @@
 FROM node:8.10.0
 RUN apt-get update
-RUN apt-get install git python build-essential linux-headers
+RUN apt-get install git python build-essential linux-headers-rpi
 WORKDIR /root
 RUN git clone https://github.com/enorrmann/brewery-control
 WORKDIR /root/brewery-control
