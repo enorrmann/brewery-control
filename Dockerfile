@@ -1,4 +1,4 @@
-FROM node:8.10.0
+FROM node:10.19.0-buster
 RUN apt-get update
 RUN apt-get install git python build-essential linux-headers-rpi
 WORKDIR /root
