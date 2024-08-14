@@ -27,26 +27,26 @@ myEvents.on("adjust", function (data) {
 
 var path = require('path');
 var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(json2xls.middleware);
 
 
 passport.use(new Strategy(
-        function (username, password, cb) {
-            db.users.findByUsername(username, function (err, user) {
-                if (err) {
-                    return cb(err);
-                }
-                if (!user) {
-                    return cb(null, false);
-                }
-                if (user.password != password) {
-                    return cb(null, false);
-                }
-                return cb(null, user);
-            });
-        }));
+    function (username, password, cb) {
+        db.users.findByUsername(username, function (err, user) {
+            if (err) {
+                return cb(err);
+            }
+            if (!user) {
+                return cb(null, false);
+            }
+            if (user.password != password) {
+                return cb(null, false);
+            }
+            return cb(null, user);
+        });
+    }));
 
 passport.serializeUser(function (user, cb) {
     cb(null, user.id);
@@ -63,8 +63,8 @@ passport.deserializeUser(function (id, cb) {
 
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({extended: true}));
-app.use(require('express-session')({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -112,30 +112,30 @@ app.get('/*.woff*', function (req, res) {
     res.sendFile(path.join(__dirname, './startmin', req.url));
 });
 app.get('/*.html',
-        require('connect-ensure-login').ensureLoggedIn(),
-        function (req, res) {
-            res.sendFile(path.join(__dirname, './startmin/pages', req.url));
-        });
+    require('connect-ensure-login').ensureLoggedIn(),
+    function (req, res) {
+        res.sendFile(path.join(__dirname, './startmin/pages', req.url));
+    });
 
 app.get('/',
-        require('connect-ensure-login').ensureLoggedIn(),
-        function (req, res) {
-            res.sendFile(path.join(__dirname, './startmin/pages', 'index.html'));
-        });
+    require('connect-ensure-login').ensureLoggedIn(),
+    function (req, res) {
+        res.sendFile(path.join(__dirname, './startmin/pages', 'index.html'));
+    });
 
 app.post('/system/powerdown',
-        require('connect-ensure-login').ensureLoggedIn(),
-        function (req, res) {
-            res.status(200).send();
-            //shell.exec('sudo /sbin/shutdown -h now');
-            shell.exec('sudo /sbin/halt');
-        });
+    require('connect-ensure-login').ensureLoggedIn(),
+    function (req, res) {
+        res.status(200).send();
+        //shell.exec('sudo /sbin/shutdown -h now');
+        shell.exec('sudo /sbin/halt');
+    });
 
 app.post('/login',
-        passport.authenticate('local', {failureRedirect: '/login'}),
-        function (req, res) {
-            res.redirect('/');
-        });
+    passport.authenticate('local', { failureRedirect: '/login' }),
+    function (req, res) {
+        res.redirect('/');
+    });
 
 
 app.get('/programas', function (req, res) {
@@ -186,7 +186,7 @@ var initPort = function (puerto) {
         self.port = null;
 
     });
-    const parser = port.pipe(new Readline({delimiter: '\n'}));
+    const parser = port.pipe(new Readline({ delimiter: '\n' }));
     parser.on('data', function (data) {
         if (data[0] == 1) { // si se detecta un reinicio 
             sendDefaults(); // envio comandos de valores default
@@ -216,7 +216,8 @@ setInterval(function () {
     SerialPort.list(function (err, ports) {
         if (ports) {
             ports.forEach(function (each) {
-                if (JSON.stringify(each).match(/.*duino.*/gi)) {
+                let p = JSON.stringify(each);
+                if (p.match(/.*duino.*/gi) || p.match(/.*ttyUSB0.*/gi)) {
                     initPort(each.comName);
                 }
                 ;
@@ -227,4 +228,3 @@ setInterval(function () {
 
 
 http.listen(3000);
- 
