@@ -7,8 +7,8 @@ var asJson = function (sensorData) {
     // 1 registro de estado + 4 datos de limites seteados  + 4 lecturas de sensores  + 4 estados de compresor activo   + 1 elemento vacio luego del ultimo ;
 
     var largo_trama_esperado = (cant_tachos * 3) + 2;
-    console.log("dataArray");
-    console.log(dataArray);
+    console.log("sensorData");
+    console.log(sensorData);
     if (dataArray.length != largo_trama_esperado) {
         console.log("valor trama esperado difiere");
         console.log(dataArray.length);
