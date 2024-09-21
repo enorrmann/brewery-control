@@ -38,21 +38,37 @@ socket.on('message', function (data) {
     $(".maxtacho1").html(dataArray[2]);
     $(".maxtacho2").html(dataArray[3]);
     $(".maxtacho3").html(dataArray[4]);
+    $(".maxtacho4").html(dataArray[5]);
+    $(".maxtacho5").html(dataArray[6]);
+    $(".maxtacho6").html(dataArray[7]);
+    $(".maxtacho7").html(dataArray[8]);
 
-    $(".tacho0").html(dataArray[5] + '&deg;C');
-    $(".tacho1").html(dataArray[6] + '&deg;C');
-    $(".tacho2").html(dataArray[7] + '&deg;C');
-    $(".tacho3").html(dataArray[8] + '&deg;C');
+    $(".tacho0").html(dataArray[9] + '&deg;C');
+    $(".tacho1").html(dataArray[10] + '&deg;C');
+    $(".tacho2").html(dataArray[11] + '&deg;C');
+    $(".tacho3").html(dataArray[12] + '&deg;C');
+    $(".tacho4").html(dataArray[13] + '&deg;C');
+    $(".tacho5").html(dataArray[14] + '&deg;C');
+    $(".tacho6").html(dataArray[15] + '&deg;C');
+    $(".tacho7").html(dataArray[16] + '&deg;C');
 
-    var comp0 = dataArray[9];
-    var comp1 = dataArray[10];
-    var comp2 = dataArray[11];
-    var comp3 = dataArray[12];
+    var comp0 = dataArray[17];
+    var comp1 = dataArray[18];
+    var comp2 = dataArray[19];
+    var comp3 = dataArray[20];
+    var comp4 = dataArray[21];
+    var comp5 = dataArray[22];
+    var comp6 = dataArray[23];
+    var comp7 = dataArray[24];
 
     setClasses(0, comp0);
     setClasses(1, comp1);
     setClasses(2, comp2);
     setClasses(3, comp3);
+    setClasses(4, comp4);
+    setClasses(5, comp5);
+    setClasses(6, comp6);
+    setClasses(7, comp7);
 
 });
 
