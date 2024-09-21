@@ -14,6 +14,7 @@ var myEvents = require('./modules/myEvents.js');
 var json2xls = require('json2xls');
 
 const shell = require('shelljs');
+const cant_tachos = 8;
 
 myEvents.on("adjust", function (data) {
     var codTacho = data.tacho.replace('t', 'S');
@@ -80,22 +81,22 @@ var defaults = fs.readFileSync(propertiesFile, 'utf8');
 var maxArray = defaults.split(";");
 
 var sendDefaults = function () {
-    if (!program.tieneProgramaActivo('t1')) {
-        port.write('S1X0' + maxArray[0] + 'E');
-    }
-    if (!program.tieneProgramaActivo('t2')) {
-        port.write('S2X0' + maxArray[1] + 'E');
-    }
-    if (!program.tieneProgramaActivo('t3')) {
-        port.write('S3X0' + maxArray[2] + 'E');
-    }
-    if (!program.tieneProgramaActivo('t4')) {
-        port.write('S4X0' + maxArray[3] + 'E');
-    }
+     // Crear el array de programas dinámicamente
+     const programas = Array.from({length: cant_tachos}, (_, i) => `t${i + 1}`);
+    //const programas = ['t1', 't2', 't3', 't4','t5', 't6', 't7', 't8'];
+
+    programas.forEach((programa, index) => {
+        if (!program.tieneProgramaActivo(programa)) {
+            const comando = `S${index + 1}X0${maxArray[index]}E`;
+            console.log("envio comando "+comando);
+            port.write(comando);
+        }
+    });
+
 };
 
 var getMaxString = function () {
-    return maxArray[0] + ';' + maxArray[1] + ';' + maxArray[2] + ';' + maxArray[3] + ';';
+    return maxArray.slice(0, cant_tachos).join(';') + ';';
 };
 
 app.get('/login', function (req, res) {
@@ -227,4 +228,4 @@ setInterval(function () {
 }, 1000);
 
 
-http.listen(3000);
+http.listen(3003);

@@ -149,7 +149,7 @@ var logIfYouMust = function (fermentador, jsonData) {
                 status: jsonData.status,
                 limite: currentLimit,
                 temperatura: currentVal,
-                compresor: jsonData.compresor
+                compresor: jsonData.compresor1
             };
             logDb.push("/running/" + fermentador + "/log[]", toSave);
         } else {

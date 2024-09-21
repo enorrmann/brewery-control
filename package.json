@@ -9,6 +9,7 @@
   "author": "Emilio Norrmann",
   "license": "ISC",
   "dependencies": {
+    "0": "0.0.0",
     "angular": "^1.7.3",
     "angular-resource": "^1.7.4",
     "body-parser": "^1.18.3",
