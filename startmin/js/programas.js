@@ -128,7 +128,7 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         return url.save({}, $scope.programas).$promise;
     };
 
-    $scope.tachos = ['t1', 't2', 't3', 't4'];
+    $scope.tachos = ['t1', 't2', 't3', 't4','t5', 't6', 't7', 't8' ] ;
 
 
     $scope.apagarSistema = function () {
