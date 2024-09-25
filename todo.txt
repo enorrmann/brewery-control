@@ -1,0 +1,11 @@
+(node:1808) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'm1' of undefined
+    at getCurrentLimit (/home/pi/brewery-control/modules/program.js:125:20)
+    at adjustIfYouMust (/home/pi/brewery-control/modules/program.js:162:24)
+    at /home/pi/brewery-control/modules/program.js:232:9
+    at Array.forEach (<anonymous>)
+    at Object.monitor (/home/pi/brewery-control/modules/program.js:231:26)
+    at ReadLineParser.<anonymous> (/home/pi/brewery-control/app.js:195:17)
+    at ReadLineParser.emit (events.js:198:13)
+    at addChunk (_stream_readable.js:288:12)
+    at readableAddChunk (_stream_readable.js:265:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:224:10)

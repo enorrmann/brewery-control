@@ -126,7 +126,7 @@ var getCurrentLimit = function (tacho, jsonData) {
 };
 
 var adjust = function (tacho, value) {
-    myEvents.emit("adjust", {tacho: tacho, value: value});
+    myEvents.emit("adjust", { tacho: tacho, value: value });
 };
 
 var getLog = function (fermentador) {
@@ -229,8 +229,12 @@ var monitor = function (sensorData) {
 
     });
     fermentadoresActivos.forEach(function (fermentador) {
-        adjustIfYouMust(fermentador, jsonData);
-        logIfYouMust(fermentador, jsonData);
+        if (jsonData) {
+
+
+            adjustIfYouMust(fermentador, jsonData);
+            logIfYouMust(fermentador, jsonData);
+        } else { console.log("jsonData is undefined") }
     });
 
 };
