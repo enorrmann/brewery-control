@@ -34,6 +34,7 @@ socket.on('message', function (data) {
     $('#mensajeEsperandoArduino').hide();
     var dataArray = data.split(";");
 
+    console.log(dataArray);
 
     $(".maxtacho0").html(dataArray[1]);
     $(".maxtacho1").html(dataArray[2]);
