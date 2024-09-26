@@ -20,7 +20,9 @@ myEvents.on("adjust", function (data) {
     var codTacho = data.tacho.replace('t', 'S');
     var maximo = data.value;
     var codigoAEnviar = codTacho + 'X0' + maximo + 'E';
+    
     if (port && port !== null) {
+        console.log("envio ajuste "+codigoAEnviar);
         port.write(codigoAEnviar);
     }
 
