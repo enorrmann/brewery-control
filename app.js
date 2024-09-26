@@ -14,7 +14,7 @@ var myEvents = require('./modules/myEvents.js');
 var json2xls = require('json2xls');
 
 const shell = require('shelljs');
-const cant_tachos = 8;
+const cant_tachos = 6;
 
 myEvents.on("adjust", function (data) {
     var codTacho = data.tacho.replace('t', 'S');

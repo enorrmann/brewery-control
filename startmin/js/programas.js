@@ -127,8 +127,10 @@ app.controller('programaCtrl', function ($scope, $resource, $interval) {
         var url = $resource('programas');
         return url.save({}, $scope.programas).$promise;
     };
-
-    $scope.tachos = ['t1', 't2', 't3', 't4','t5', 't6', 't7', 't8' ] ;
+    
+    var cant_tachos = 6;
+    $scope.tachos = Array.from({length: cant_tachos}, (_, i) => `t${i + 1}`);
+    
 
 
     $scope.apagarSistema = function () {

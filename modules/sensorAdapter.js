@@ -1,7 +1,7 @@
 var asJson = function (sensorData) {
     var dataArray = sensorData.split(" ").join("").split(";");
     // Definimos la cantidad de registros
-    const cant_tachos = 8;
+    const cant_tachos = 6;
     const numRegistros = cant_tachos;
 
     // 1 registro de estado + 4 datos de limites seteados  + 4 lecturas de sensores  + 4 estados de compresor activo   + 1 elemento vacio luego del ultimo ;
@@ -24,17 +24,17 @@ var asJson = function (sensorData) {
     };
 
 
-    // Agregar propiedades m1-m8
+    // Agregar propiedades m1 hasta cant_tachos
     for (let i = 1; i <= numRegistros; i++) {
         newData[`m${i}`] = dataArray[i] || null;
     }
 
-    // Agregar propiedades t1-t8
+    // Agregar propiedades t1 hasta cant_tachos
     for (let i = 1; i <= numRegistros; i++) {
         newData[`t${i}`] = dataArray[i + numRegistros] || null;
     }
 
-    // Agregar propiedades compresor1-compresor8
+    // Agregar propiedades compresor1 hasta cant_tachos
     for (let i = 1; i <= numRegistros; i++) {
         newData[`compresor${i}`] = dataArray[i + (2 * numRegistros)] || null;
     }
