@@ -4,7 +4,7 @@ var asJson = function (sensorData) {
     const cant_tachos = 6;
     const numRegistros = cant_tachos;
 
-    // 1 registro de estado + 4 datos de limites seteados  + 4 lecturas de sensores  + 4 estados de compresor activo   + 1 elemento vacio luego del ultimo ;
+    // 1 registro de estado + cant_tachos datos de limites seteados  + cant_tachos lecturas de sensores  + cant_tachos estados de compresor activo   + 1 elemento vacio luego del ultimo ;
 
     var largo_trama_esperado = (cant_tachos * 3) + 2;
     console.log("sensorData");
